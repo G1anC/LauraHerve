@@ -10,10 +10,12 @@ COPY packages/auth-shared/package.json ./packages/auth-shared/
 COPY packages/crypto/package.json ./packages/crypto/
 COPY packages/database/package.json ./packages/database/
 COPY packages/env/package.json ./packages/env/
+COPY packages/eslint-config/package.json ./packages/eslint-config/
 COPY packages/logger/package.json ./packages/logger/
 COPY packages/storage/package.json ./packages/storage/
 COPY packages/stripe/package.json ./packages/stripe/
 COPY packages/trpc/package.json ./packages/trpc/
+COPY packages/tsconfig/package.json ./packages/tsconfig/
 COPY packages/types/package.json ./packages/types/
 
 RUN bun install --production

@@ -33,6 +33,8 @@ COPY . .
 ARG PUBLIC_BACKEND_URL
 ENV PUBLIC_BACKEND_URL=$PUBLIC_BACKEND_URL
 
+RUN bun run db:generate
+
 RUN bun run build --filter=@repo/frontend
 
 FROM base AS runner
