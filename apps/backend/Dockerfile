@@ -1,7 +1,5 @@
 FROM oven/bun:1.3.7-alpine AS base
 
-ARG CACHEBUST=2026-03-12T21:23
-
 FROM base AS deps
 WORKDIR /app
 
