@@ -5,7 +5,7 @@ const baseSchema = z.object({
 });
 
 export const publicEnvSchema = baseSchema.extend({
-  API_URL: z.string().url(),
+  VITE_API_URL: z.string().url(),
 });
 
 export const serverEnvSchema = baseSchema.extend({
