@@ -1,7 +1,7 @@
 <script lang="ts">
   import authStore from '$lib/auth-store';
   import { trpc } from '$lib/trpc';
-  import { Button, Input, Spinner, Alert, Toggle, LanguageSwitcher } from '@repo/ui';
+  import { Button, Input, Spinner, Alert, Toggle } from '@repo/ui';
   import { uploadFile } from '@repo/storage-client';
   import { logger } from '@repo/logger';
   import 'iconify-icon';
@@ -439,16 +439,6 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div
-            class="bg-white p-6 rounded-[28px] border border-neutral-200 flex flex-col justify-between shadow-sm"
-          >
-            <div class="mb-4">
-              <h4 class="font-black uppercase text-sm mb-1">Language</h4>
-              <p class="text-sm text-neutral-500">Interface language</p>
-            </div>
-            <LanguageSwitcher />
-          </div>
-
           <div
             class="bg-white p-6 rounded-[28px] border border-neutral-200 flex flex-col justify-between shadow-sm"
           >
