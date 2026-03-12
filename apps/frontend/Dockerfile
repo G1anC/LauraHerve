@@ -42,4 +42,4 @@ USER frontend
 
 EXPOSE 3000
 
-CMD ["bun", "run", "apps/frontend/build"]
+CMD ["bun", "apps/frontend/build/index.js"]

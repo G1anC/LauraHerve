@@ -3,6 +3,6 @@ builder = "dockerfile"
 dockerfilePath = "apps/backoffice/Dockerfile"
 
 [deploy]
-startCommand = "bun run apps/backoffice/build"
+startCommand = "bun apps/backoffice/build/index.js"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 10

@@ -42,4 +42,4 @@ USER backoffice
 
 EXPOSE 3000
 
-CMD ["bun", "run", "apps/backoffice/build"]
+CMD ["bun", "apps/backoffice/build/index.js"]
