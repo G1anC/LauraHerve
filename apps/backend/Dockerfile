@@ -9,13 +9,15 @@ COPY apps/backoffice/package.json ./apps/backoffice/
 COPY apps/frontend/package.json ./apps/frontend/
 COPY packages ./packages
 
-RUN bun install --production
+RUN bun install
 
 FROM base AS builder
 WORKDIR /app
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+
+RUN bun install
 
 RUN cd packages/database && bun run db:generate
 
