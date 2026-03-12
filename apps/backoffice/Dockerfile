@@ -19,8 +19,8 @@ COPY . .
 
 RUN bun install --frozen-lockfile
 
-ARG PUBLIC_BACKEND_URL
-ENV PUBLIC_BACKEND_URL=$PUBLIC_BACKEND_URL
+ARG VITE_API_URL
+ENV VITE_API_URL=$VITE_API_URL
 
 RUN bun run build --filter=@repo/backoffice
 
