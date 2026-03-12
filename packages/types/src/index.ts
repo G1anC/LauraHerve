@@ -7,7 +7,7 @@ export type {
   Media,
   Prisma,
   PrismaClient,
-} from '@repo/database';
+} from '@repo/database/types';
 
 export enum UserRole {
   ADMIN = 'ADMIN',
