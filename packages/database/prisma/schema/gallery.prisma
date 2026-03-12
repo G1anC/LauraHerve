@@ -1,0 +1,17 @@
+model GalleryItem {
+  id          String   @id @default(uuid())
+  title       String
+  description String   @db.Text
+  date        String
+  link        String?
+
+  media       Media    @relation("GalleryMedia", fields: [mediaId], references: [id], onDelete: Cascade)
+  mediaId     String   @unique
+
+  order       Int      @default(0)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([order])
+}

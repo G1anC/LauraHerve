@@ -1,0 +1,23 @@
+{
+  "name": "@repo/auth",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@repo/tsconfig": "workspace:*",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@repo/auth-shared": "workspace:*",
+    "@repo/crypto": "workspace:*",
+    "@repo/database": "workspace:*",
+    "@repo/env": "workspace:*",
+    "jose": "^6.1.3"
+  }
+}

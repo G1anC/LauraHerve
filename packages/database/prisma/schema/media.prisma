@@ -1,0 +1,11 @@
+model Media {
+        id        String   @id @default(uuid())
+        url       String
+        key       String  @unique
+        mimeType  String
+        size      Int
+
+        galleryItem GalleryItem? @relation("GalleryMedia")
+
+        createdAt DateTime @default(now())
+}

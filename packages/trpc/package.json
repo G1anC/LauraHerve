@@ -1,0 +1,32 @@
+{
+  "name": "@repo/trpc",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./client": "./src/client.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@repo/auth": "workspace:*",
+    "@repo/auth-shared": "workspace:*",
+    "@repo/database": "workspace:*",
+    "@repo/env": "workspace:*",
+    "@repo/logger": "workspace:*",
+    "@repo/storage": "workspace:*",
+    "@repo/types": "workspace:*",
+    "@trpc/server": "^11.9.0",
+    "trpc-to-openapi": "^3.1.0",
+    "zod": "^3.24.1",
+    "zod-openapi": "^5.4.6"
+  },
+  "devDependencies": {
+    "@repo/tsconfig": "workspace:*",
+    "@types/bcryptjs": "^3.0.0",
+    "@types/jsonwebtoken": "^9.0.10",
+    "typescript": "^5.9.3"
+  }
+}

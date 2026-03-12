@@ -1,0 +1,7 @@
+model AboutSection {
+  id        String   @id @default(uuid())
+  content   String   @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

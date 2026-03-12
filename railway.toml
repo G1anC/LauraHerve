@@ -1,0 +1,8 @@
+[build]
+builder = "nixpacks"
+buildCommand = "bun install && cd packages/database && bun run db:generate"
+
+[deploy]
+startCommand = "/bin/sh -c 'cd packages/database && bun run db:migrate:deploy && cd ../../apps/backend && bun run start'"
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 10

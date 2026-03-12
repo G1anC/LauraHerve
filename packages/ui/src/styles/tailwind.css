@@ -1,0 +1,71 @@
+@import "tailwindcss";
+@import "./gambarino.css";
+@import "./satoshi.css";
+
+@source "../../../apps/**/src/**/*.{svelte,ts,js}";
+@source "../../ui/src/**/*.{svelte,ts,js}";
+
+@theme {
+  --font-title: 'Gambarino', serif;
+  --font-body: 'Satoshi', sans-serif;
+
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-gray-50: #fafafa;
+  --color-gray-100: #f5f5f5;
+  --color-gray-200: #e5e5e5;
+  --color-gray-300: #d4d4d4;
+  --color-gray-400: #a3a3a3;
+  --color-gray-500: #737373;
+  --color-gray-600: #525252;
+  --color-gray-700: #404040;
+  --color-gray-800: #262626;
+  --color-gray-900: #171717;
+
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+@layer base {
+  body {
+    font-family: var(--font-body);
+    background-color: var(--color-white);
+    color: var(--color-black);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-title);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .bg-black {
+    background-color: var(--color-black);
+  }
+
+  .bg-white {
+    background-color: var(--color-white);
+  }
+
+  .text-black {
+    color: var(--color-black);
+  }
+
+  .text-white {
+    color: var(--color-white);
+  }
+
+  ::selection {
+    background-color: var(--color-black);
+    color: var(--color-white);
+  }
+}

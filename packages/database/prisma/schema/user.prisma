@@ -1,0 +1,30 @@
+model User {
+  id             String    @id @default(uuid())
+  email          String    @unique
+  firstName      String
+  lastName       String
+  password       String
+  emailVerified  Boolean   @default(false)
+  role           UserRole  @default(ADMIN)
+
+  lastLoginAt    DateTime?
+  lastLoginIp    String?
+
+  sessions       Session[]
+  accounts       Account[]
+  auditLogs      AuditLog[]
+
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@index([emailVerified])
+}
+
+enum UserRole {
+  ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+}
+

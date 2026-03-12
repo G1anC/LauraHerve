@@ -1,0 +1,16 @@
+<script lang="ts">
+    import { cn } from '@repo/utils';
+    import type { Snippet } from 'svelte';
+
+    let {
+        class: className = '',
+        children,
+    }: {
+        class?: string;
+        children?: Snippet;
+    } = $props();
+</script>
+
+<div class={cn("w-full", className)}>
+    {@render children?.()}
+</div>

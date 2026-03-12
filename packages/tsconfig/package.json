@@ -1,0 +1,17 @@
+{
+  "name": "@repo/tsconfig",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    "./base.json": "./base.json",
+    "./sveltekit.json": "./sveltekit.json",
+    "./react.json": "./react.json",
+    "./node.json": "./node.json"
+  },
+  "files": [
+    "base.json",
+    "sveltekit.json",
+    "react.json",
+    "node.json"
+  ]
+}
