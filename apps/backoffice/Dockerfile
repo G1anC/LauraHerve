@@ -20,7 +20,6 @@ COPY . .
 ARG PUBLIC_BACKEND_URL
 ENV PUBLIC_BACKEND_URL=$PUBLIC_BACKEND_URL
 
-RUN cd packages/database && bun run db:generate
 RUN bun run build --filter=@repo/backoffice
 
 FROM base AS runner
