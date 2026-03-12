@@ -21,4 +21,3 @@ export type AppRouter = typeof appRouter;
 
 export { createContext, type Context, type CreateContextOptions } from './context';
 export { publicProcedure, protectedProcedure, adminProcedure } from './trpc';
-export { globalCacheFactory } from './cache';
