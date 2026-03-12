@@ -123,6 +123,7 @@
           <button
             on:click={() => handleRemoveMedia('cover')}
             class="bg-white text-red-600 p-3 rounded-2xl hover:bg-red-600 hover:text-white transition shadow-2xl"
+            aria-label="Remove cover image"
           >
             <iconify-icon icon="solar:trash-bin-trash-bold" width="22"></iconify-icon>
           </button>
@@ -171,6 +172,7 @@
               on:click={() => avatarInput.click()}
               class="absolute -bottom-2 -right-2 bg-black text-white w-14 h-14 rounded-2xl flex items-center justify-center shadow-xl hover:scale-110 transition active:scale-90 border-4 border-white"
               disabled={actionLoading !== ''}
+              aria-label="Change profile picture"
             >
               <iconify-icon icon="solar:camera-bold" width="24"></iconify-icon>
             </button>

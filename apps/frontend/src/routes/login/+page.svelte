@@ -70,7 +70,6 @@
           placeholder="Email Address"
           class={inputClass}
           required
-          autofocus
         />
         <input
           type="password"

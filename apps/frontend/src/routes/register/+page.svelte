@@ -100,7 +100,6 @@
             placeholder="First Name"
             class={inputClass}
             required
-            autofocus
           />
           <input bind:value={lastName} placeholder="Last Name" class={inputClass} required />
         </div>
@@ -130,7 +129,6 @@
           placeholder="name@company.com"
           class={inputClass}
           required
-          autofocus
         />
         <button type="submit" disabled={!email} class={btnClass}> Continue </button>
       </form>
@@ -157,7 +155,6 @@
             placeholder="Password"
             class={inputClass}
             required
-            autofocus
           />
           <input
             type="password"
