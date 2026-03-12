@@ -14,6 +14,7 @@ RUN bun install
 FROM base AS builder
 WORKDIR /app
 
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 RUN bun install --frozen-lockfile
