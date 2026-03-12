@@ -4,7 +4,9 @@ FROM base AS deps
 WORKDIR /app
 
 COPY package.json bun.lock ./
+COPY apps/backend/package.json ./apps/backend/
 COPY apps/backoffice/package.json ./apps/backoffice/
+COPY apps/frontend/package.json ./apps/frontend/
 COPY packages/admin/package.json ./packages/admin/
 COPY packages/auth/package.json ./packages/auth/
 COPY packages/auth-shared/package.json ./packages/auth-shared/
@@ -15,6 +17,7 @@ COPY packages/eslint-config/package.json ./packages/eslint-config/
 COPY packages/logger/package.json ./packages/logger/
 COPY packages/storage/package.json ./packages/storage/
 COPY packages/storage-client/package.json ./packages/storage-client/
+COPY packages/stripe/package.json ./packages/stripe/
 COPY packages/trpc/package.json ./packages/trpc/
 COPY packages/trpc-client/package.json ./packages/trpc-client/
 COPY packages/tsconfig/package.json ./packages/tsconfig/

@@ -5,6 +5,8 @@ WORKDIR /app
 
 COPY package.json bun.lock ./
 COPY apps/backend/package.json ./apps/backend/
+COPY apps/backoffice/package.json ./apps/backoffice/
+COPY apps/frontend/package.json ./apps/frontend/
 COPY packages ./packages
 
 RUN bun install --production
