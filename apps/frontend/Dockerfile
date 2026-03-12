@@ -7,7 +7,6 @@ COPY package.json bun.lock ./
 COPY apps/frontend/package.json ./apps/frontend/
 COPY packages/auth-shared/package.json ./packages/auth-shared/
 COPY packages/env/package.json ./packages/env/
-COPY packages/i18n/package.json ./packages/i18n/
 COPY packages/logger/package.json ./packages/logger/
 COPY packages/storage-client/package.json ./packages/storage-client/
 COPY packages/trpc-client/package.json ./packages/trpc-client/
