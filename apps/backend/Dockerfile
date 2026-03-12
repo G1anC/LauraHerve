@@ -14,10 +14,9 @@ RUN bun install
 FROM base AS builder
 WORKDIR /app
 
-COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-RUN bun install
+RUN bun install --frozen-lockfile
 
 RUN cd packages/database && bun run db:generate
 
