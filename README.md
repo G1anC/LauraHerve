@@ -45,7 +45,6 @@ MINIO_ROOT_PASSWORD=minioadmin
 MINIO_BUCKET_NAME=uploads
 
 # CORS
-FRONTEND_URL=http://localhost:5173
 TRUSTED_ORIGINS=http://localhost:5173,http://localhost:3002
 ```
 

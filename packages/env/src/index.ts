@@ -10,7 +10,6 @@ export const publicEnvSchema = baseSchema.extend({
 
 export const serverEnvSchema = baseSchema.extend({
   PORT: z.coerce.number().default(3001),
-  FRONTEND_URL: z.string().url(),
   TRUSTED_ORIGINS: z.string().transform((s) => s.split(',').map((u) => u.trim())),
 
   JWT_SECRET: z.string().min(32),

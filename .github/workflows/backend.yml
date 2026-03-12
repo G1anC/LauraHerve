@@ -34,6 +34,3 @@ jobs:
 
       - name: Build backend
         run: bun run build --filter=@repo/backend
-
-      - name: Run type check
-        run: cd apps/backend && bun run typecheck

@@ -175,7 +175,6 @@ Each app validates its environment on startup via `check-env` script using Zod.
 **Required backend variables:**
 - `JWT_SECRET`: JWT encryption key
 - `MINIO_ENDPOINT`, `MINIO_ROOT_USER`, `MINIO_ROOT_PASSWORD`, `MINIO_BUCKET_NAME`
-- `FRONTEND_URL`: For CORS
 - `TRUSTED_ORIGINS`: Comma-separated allowed origins
 
 See `apps/backend/.env.example` for complete reference.
