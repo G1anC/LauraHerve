@@ -15,7 +15,7 @@ import {
 const app = new Hono();
 
 const authManager = new AuthManager({
-  jwtSecret: env.JWT_SECRET,
+  jwtSecret: env.ENCRYPTION_SECRET,
 });
 
 const storage = new StorageService({

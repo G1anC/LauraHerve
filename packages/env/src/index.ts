@@ -12,7 +12,7 @@ export const serverEnvSchema = baseSchema.extend({
   PORT: z.coerce.number().default(3001),
   TRUSTED_ORIGINS: z.string().transform((s) => s.split(',').map((u) => u.trim())),
 
-  JWT_SECRET: z.string().min(32),
+  ENCRYPTION_SECRET: z.string().min(32),
 
   MINIO_ROOT_USER: z.string(),
   MINIO_ROOT_PASSWORD: z.string(),

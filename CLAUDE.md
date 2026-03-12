@@ -173,7 +173,7 @@ Environment schemas are defined in `packages/env/src/index.ts`:
 Each app validates its environment on startup via `check-env` script using Zod.
 
 **Required backend variables:**
-- `JWT_SECRET`: JWT encryption key
+- `ENCRYPTION_SECRET`: Encryption key for JWT tokens and data encryption (min 32 chars)
 - `MINIO_ENDPOINT`, `MINIO_ROOT_USER`, `MINIO_ROOT_PASSWORD`, `MINIO_BUCKET_NAME`
 - `TRUSTED_ORIGINS`: Comma-separated allowed origins
 
