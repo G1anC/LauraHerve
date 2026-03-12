@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "lint": "eslint .",
-    "typecheck": "svelte-check",
+    "type-check": "svelte-check",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },

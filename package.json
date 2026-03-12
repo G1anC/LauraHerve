@@ -16,7 +16,7 @@
     "dev:db:setup": "./scripts/start-db-dev.sh && cd packages/database && bun run db:push",
     "db:studio": "cd packages/database && bun run db:studio",
     "db:seed": "cd packages/database && bun run db:seed",
-    "typecheck": "turbo run typecheck"
+    "type-check": "turbo run type-check"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.18",
