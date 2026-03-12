@@ -15,6 +15,7 @@ COPY packages/eslint-config/package.json ./packages/eslint-config/
 COPY packages/logger/package.json ./packages/logger/
 COPY packages/storage/package.json ./packages/storage/
 COPY packages/storage-client/package.json ./packages/storage-client/
+COPY packages/stripe/package.json ./packages/stripe/
 COPY packages/trpc/package.json ./packages/trpc/
 COPY packages/trpc-client/package.json ./packages/trpc-client/
 COPY packages/types/package.json ./packages/types/
