@@ -17,7 +17,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-RUN bun run db:generate
+RUN cd packages/database && bun run db:generate
 
 FROM base AS runner
 WORKDIR /app
