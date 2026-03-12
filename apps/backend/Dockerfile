@@ -16,7 +16,7 @@ COPY packages/stripe/package.json ./packages/stripe/
 COPY packages/trpc/package.json ./packages/trpc/
 COPY packages/types/package.json ./packages/types/
 
-RUN bun install --frozen-lockfile --production
+RUN bun install --production
 
 FROM base AS builder
 WORKDIR /app
