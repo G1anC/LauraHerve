@@ -1,1 +1,1 @@
-mc anonymous set download local/my-app-bucket
+mc anonymous set download local/laura-herve-gallery

@@ -60,7 +60,6 @@ export async function uploadFile(
       });
 
       xhr.open('PUT', presignedUrl);
-      xhr.setRequestHeader('Content-Type', file.type);
       xhr.send(file);
     });
 
@@ -89,9 +88,6 @@ export async function uploadFileSimple(file: File, presignedUrl: string): Promis
     const response = await fetch(presignedUrl, {
       method: 'PUT',
       body: file,
-      headers: {
-        'Content-Type': file.type,
-      },
     });
 
     if (!response.ok) {
