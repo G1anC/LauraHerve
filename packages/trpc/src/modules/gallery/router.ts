@@ -1,31 +1,11 @@
 import { z } from 'zod';
 import { router, publicProcedure, adminProcedure } from '../../trpc';
 import galleryService from './service';
-
-const createGalleryItemSchema = z.object({
-  title: z.string().min(1, 'Title is required').max(200, 'Title too long'),
-  description: z.string().min(1, 'Description is required'),
-  date: z.string().min(1, 'Date is required'),
-  link: z.string().url('Must be a valid URL').optional().nullable(),
-  mediaId: z.string().uuid(),
-});
-
-const updateGalleryItemSchema = z.object({
-  id: z.string().uuid(),
-  title: z.string().min(1, 'Title is required').max(200, 'Title too long').optional(),
-  description: z.string().optional(),
-  date: z.string().optional(),
-  link: z.string().url('Must be a valid URL').optional().nullable(),
-});
-
-const reorderItemsSchema = z.object({
-  items: z.array(
-    z.object({
-      id: z.string().uuid(),
-      order: z.number().int().min(0),
-    })
-  ),
-});
+import {
+  createGalleryItemSchema,
+  updateGalleryItemSchema,
+  reorderItemsSchema,
+} from './types';
 
 export const galleryRouter = router({
   list: publicProcedure.query(async ({ ctx }) => {

@@ -1,11 +1,12 @@
 import type { PrismaClient } from '@repo/database';
 import type { StorageService } from '@repo/storage';
+import type { UploadUrlInput, CreateMediaInput } from './types';
 
 export const mediaService = {
   generateUploadUrl: async (
     storage: StorageService,
     userId: string,
-    data: { fileName: string; fileType: string }
+    data: UploadUrlInput
   ) => {
     const fileKey = `gallery/${userId}/${Date.now()}-${data.fileName}`;
 
@@ -23,7 +24,7 @@ export const mediaService = {
 
   createMedia: async (
     db: PrismaClient,
-    data: { url: string; key: string; mimeType: string; size: number }
+    data: CreateMediaInput
   ) => {
     return db.media.create({
       data: {

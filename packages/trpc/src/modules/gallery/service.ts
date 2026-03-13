@@ -1,26 +1,10 @@
 import type { PrismaClient } from '@repo/database';
 import { TRPCError } from '@trpc/server';
-
-interface CreateGalleryItemInput {
-  title: string;
-  description: string;
-  date: string;
-  link?: string | null;
-  mediaId: string;
-}
-
-interface UpdateGalleryItemInput {
-  id: string;
-  title?: string;
-  description?: string;
-  date?: string;
-  link?: string | null;
-}
-
-interface ReorderItem {
-  id: string;
-  order: number;
-}
+import type {
+  CreateGalleryItemInput,
+  UpdateGalleryItemInput,
+  ReorderItem,
+} from './types';
 
 export const galleryService = {
   list: async (db: PrismaClient) => {
