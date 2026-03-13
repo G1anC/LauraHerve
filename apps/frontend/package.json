@@ -18,7 +18,6 @@
     "@fontsource/poppins": "^5.2.7",
     "@repo/auth-shared": "workspace:*",
     "@repo/env": "workspace:*",
-    "@repo/logger": "workspace:*",
     "@repo/storage-client": "workspace:*",
     "@repo/trpc-client": "workspace:*",
     "@repo/types": "workspace:*",

@@ -1,7 +1,6 @@
 <script lang="ts">
     import { uploadFileSimple } from '@repo/storage-client';
     import { toast } from '@repo/utils';
-    import { logger } from '@repo/logger';
     import 'iconify-icon';
 
     export let value: string = "";
@@ -27,7 +26,7 @@
             value = finalUrl;
             toast.push("Image envoyée !", "success");
         } catch (error) {
-            logger.error({ err: error }, "Image upload failed");
+            console.error("Image upload failed:", error);
             toast.push("Erreur lors de l'upload", "error");
             previewUrl = value;
         } finally {

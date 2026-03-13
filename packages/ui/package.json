@@ -20,7 +20,6 @@
   },
   "dependencies": {
     "@repo/admin": "workspace:*",
-    "@repo/logger": "workspace:*",
     "@repo/storage-client": "workspace:*",
     "@repo/utils": "workspace:*",
     "class-variance-authority": "^0.7.1",
