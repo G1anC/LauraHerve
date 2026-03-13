@@ -145,7 +145,6 @@
       "name": "@repo/auth-shared",
       "version": "0.0.0",
       "dependencies": {
-        "@repo/logger": "workspace:*",
         "@repo/types": "workspace:*",
         "@types/js-cookie": "^3.0.6",
         "js-cookie": "^3.0.5",

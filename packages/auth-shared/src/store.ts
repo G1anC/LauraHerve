@@ -1,6 +1,5 @@
 import type { AuthState, SessionUser } from './';
 import Cookies from 'js-cookie';
-import { logger } from '@repo/logger';
 
 type Listener<AuthState> = (value: AuthState) => void;
 
@@ -41,7 +40,7 @@ export class UniversalAuthStore {
         this.state = { ...this.state, loading: false };
       }
     } catch (e) {
-      logger.error({ err: e }, 'AuthStore Init Error');
+      console.error('AuthStore Init Error:', e);
       this.state = { user: null, session: null, loading: false };
     } finally {
       this.notify();
@@ -82,7 +81,7 @@ export class UniversalAuthStore {
       try {
         await this.onSignOut();
       } catch (e) {
-        logger.error({ err: e }, 'Server signOut failed');
+        console.error('Server signOut failed:', e);
       }
     }
     await this.clear();
