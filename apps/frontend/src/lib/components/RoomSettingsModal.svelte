@@ -2,7 +2,6 @@
   import { trpc } from '$lib/trpc';
   import { fade, scale } from 'svelte/transition';
   import { createEventDispatcher } from 'svelte';
-  import { logger } from '@repo/logger';
 
   const dispatch = createEventDispatcher();
   export let room: { id: string; name?: string; isGroup?: boolean; participants?: Array<{ userId: string; role?: string; user?: { name?: string } }> };
@@ -21,7 +20,7 @@
       await trpc.chat.inviteMember.mutate({ roomId: room.id, email: inviteEmail });
       inviteEmail = "";
       dispatch('refresh');
-    } catch (e) { logger.error({ err: e }, 'Failed to invite member to room'); }
+    } catch (e) { console.error('Failed to invite member to room:', e); }
     finally { loading = false; }
   }
 
@@ -30,7 +29,7 @@
     try {
       await trpc.chat.leaveRoom.mutate({ roomId: room.id });
       dispatch('left');
-    } catch (e) { logger.error({ err: e }, 'Failed to leave room'); }
+    } catch (e) { console.error('Failed to leave room:', e); }
   }
 
   async function deleteRoom() {
@@ -38,14 +37,14 @@
     try {
       await trpc.chat.deleteRoom.mutate({ roomId: room.id });
       dispatch('left');
-    } catch (e) { logger.error({ err: e }, 'Failed to delete room'); }
+    } catch (e) { console.error('Failed to delete room:', e); }
   }
 
   async function kickMember(userId: string) {
     try {
       await trpc.chat.kickMember.mutate({ roomId: room.id, userId });
       dispatch('refresh');
-    } catch (e) { logger.error({ err: e }, 'Failed to kick member from room'); }
+    } catch (e) { console.error('Failed to kick member from room:', e); }
   }
 </script>
 

@@ -3,7 +3,6 @@
   import { trpc } from '$lib/trpc';
   import { Button, Input, Spinner, Alert, Toggle } from '@repo/ui';
   import { uploadFile } from '@repo/storage-client';
-  import { logger } from '@repo/logger';
   import 'iconify-icon';
   import type { SessionUser } from '@repo/auth-shared';
   import { onMount } from 'svelte';
@@ -28,7 +27,7 @@
     try {
       user = await trpc.user.me.query();
     } catch (err) {
-      logger.error({ err }, 'Failed to fetch user data on settings page');
+      console.error('Failed to fetch user data on settings page:', err);
     }
   });
 
@@ -145,7 +144,7 @@
       authStore.updateUser(updatedUser as SessionUser);
       message = { type: 'success', text: 'Avatar updated successfully!' };
     } catch (err) {
-      logger.error({ err }, 'Failed to upload avatar');
+      console.error('Failed to upload avatar:', err);
       message = { type: 'error', text: 'Failed to upload avatar' };
     } finally {
       uploading = false;
@@ -180,7 +179,7 @@
       authStore.updateUser(updatedUser as SessionUser);
       message = { type: 'success', text: 'Banner updated successfully!' };
     } catch (err) {
-      logger.error({ err }, 'Failed to upload banner');
+      console.error('Failed to upload banner:', err);
       message = { type: 'error', text: 'Failed to upload banner' };
     } finally {
       uploadingBanner = false;
@@ -201,7 +200,7 @@
       await trpc.user.deleteOwnAccount.mutate();
       authStore.logout();
     } catch (err) {
-      logger.error({ err }, 'Failed to delete account');
+      console.error('Failed to delete account:', err);
       message = { type: 'error', text: 'Failed to delete account.' };
       deleteModalOpen = false;
     } finally {

@@ -1,7 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { trpc } from '$lib/trpc';
-  import { logger } from '@repo/logger';
   import 'iconify-icon';
 
   let email = '',
@@ -32,7 +31,7 @@
       aboutContent = about?.content || '';
       socialLinks = social || { instagram: null, facebook: null, email: null };
     } catch (error) {
-      logger.error({ err: error }, 'Failed to load portfolio data');
+      console.error('Failed to load portfolio data:', error);
     } finally {
       dataLoading = false;
     }
@@ -45,7 +44,7 @@
       message = 'Merci pour votre message ! Je vous répondrai bientôt.';
       email = firstName = lastName = '';
     } catch (error: unknown) {
-      logger.error({ err: error }, 'Failed to submit contact form');
+      console.error('Failed to submit contact form:', error);
       message = 'Erreur lors de l\'envoi. Veuillez réessayer.';
     }
     loading = false;
