@@ -10,7 +10,7 @@ import 'iconify-icon';
       <div>
         <button
           onclick={() => history.back()}
-          class="text-slate-500 hover:text-indigo-600 flex items-center gap-2 mb-4 font-bold transition-colors group"
+          class="text-slate-500 hover:text-black flex items-center gap-2 mb-4 font-bold transition-colors group"
         >
           <iconify-icon icon="solar:alt-arrow-left-bold" class="group-hover:-translate-x-1 transition-transform"></iconify-icon>
           Retour au Dashboard
@@ -18,14 +18,14 @@ import 'iconify-icon';
         <h1 class="text-4xl font-black text-slate-900 tracking-tighter">Mon Profil</h1>
       </div>
 
-      <div class="w-16 h-16 bg-white rounded-3xl shadow-sm border border-slate-100 flex items-center justify-center text-indigo-600">
+      <div class="w-16 h-16 bg-white rounded-3xl shadow-sm border border-slate-100 flex items-center justify-center text-black">
         <iconify-icon icon="solar:user-circle-bold" width="40"></iconify-icon>
       </div>
     </div>
 
     {#if $authStore.loading}
       <div class="bg-white rounded-[32px] shadow-sm border border-slate-100 p-12 flex flex-col items-center justify-center">
-        <iconify-icon icon="line-md:loading-twotone-loop" width="48" class="text-indigo-500 mb-4"></iconify-icon>
+        <iconify-icon icon="line-md:loading-twotone-loop" width="48" class="text-black mb-4"></iconify-icon>
         <p class="text-slate-400 font-bold">Chargement de votre compte...</p>
       </div>
     {:else if $authStore.user}
@@ -35,14 +35,14 @@ import 'iconify-icon';
           <div class="grid md:grid-cols-2 gap-10">
             <div class="space-y-1">
               <div class="text-xs font-black text-slate-300 uppercase tracking-widest ml-1">Prénom</div>
-              <div class="bg-slate-50 px-6 py-4 rounded-2xl text-slate-700 font-bold border border-transparent focus-within:border-indigo-100 transition-all">
+              <div class="bg-slate-50 px-6 py-4 rounded-2xl text-slate-700 font-bold border border-transparent focus-within:border-black transition-all">
                 {$authStore.user.firstName}
               </div>
             </div>
 
             <div class="space-y-1">
-              <div class="text-xs font-black text-slate-300 uppercase tracking-widest ml-1">Prénom</div>
-              <div class="bg-slate-50 px-6 py-4 rounded-2xl text-slate-700 font-bold border border-transparent focus-within:border-indigo-100 transition-all">
+              <div class="text-xs font-black text-slate-300 uppercase tracking-widest ml-1">Nom</div>
+              <div class="bg-slate-50 px-6 py-4 rounded-2xl text-slate-700 font-bold border border-transparent focus-within:border-black transition-all">
                 {$authStore.user.lastName}
               </div>
             </div>
@@ -58,7 +58,7 @@ import 'iconify-icon';
             <div class="space-y-1">
               <div class="text-xs font-black text-slate-300 uppercase tracking-widest ml-1">Rôle</div>
               <div class="flex">
-                <span class="bg-indigo-50 text-indigo-600 px-4 py-2 rounded-xl text-xs font-black uppercase tracking-tight flex items-center gap-2 border border-indigo-100">
+                <span class="bg-black text-white px-4 py-2 rounded-xl text-xs font-black uppercase tracking-tight flex items-center gap-2">
                   <iconify-icon icon="solar:medal-star-bold"></iconify-icon>
                   {$authStore.user.role}
                 </span>
@@ -86,14 +86,14 @@ import 'iconify-icon';
           </div>
         </div>
 
-        <div class="bg-indigo-900 rounded-[32px] p-8 text-white flex items-center justify-between">
+        <div class="bg-black rounded-[32px] p-8 text-white flex items-center justify-between">
           <div class="flex items-center gap-4">
-            <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-indigo-200">
+            <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-white/70">
               <iconify-icon icon="solar:lock-password-bold" width="24"></iconify-icon>
             </div>
             <div>
               <h4 class="font-bold">Sécurité du compte</h4>
-              <p class="text-indigo-200 text-sm">Votre mot de passe a été mis à jour pour la dernière fois il y a 3 mois.</p>
+              <p class="text-white/60 text-sm">Votre mot de passe a été mis à jour pour la dernière fois il y a 3 mois.</p>
             </div>
           </div>
           <button class="text-sm font-black bg-white/10 hover:bg-white/20 px-4 py-2 rounded-xl transition-colors">
