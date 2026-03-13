@@ -5,10 +5,19 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./src/index.ts",
-      "browser": "./src/client.ts",
-      "bun": "./src/server.ts",
-      "node": "./src/server.ts",
+      "browser": {
+        "types": "./src/client.ts",
+        "default": "./src/client.ts"
+      },
+      "bun": {
+        "types": "./src/server.ts",
+        "default": "./src/server.ts"
+      },
+      "node": {
+        "types": "./src/server.ts",
+        "default": "./src/server.ts"
+      },
+      "types": "./src/server.ts",
       "default": "./src/server.ts"
     }
   },
