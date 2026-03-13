@@ -52,7 +52,6 @@
         "@fontsource/poppins": "^5.2.7",
         "@repo/auth-shared": "workspace:*",
         "@repo/env": "workspace:*",
-        "@repo/logger": "workspace:*",
         "@repo/trpc-client": "workspace:*",
         "@repo/types": "workspace:*",
         "@repo/ui": "workspace:*",
@@ -86,7 +85,6 @@
         "@fontsource/poppins": "^5.2.7",
         "@repo/auth-shared": "workspace:*",
         "@repo/env": "workspace:*",
-        "@repo/logger": "workspace:*",
         "@repo/storage-client": "workspace:*",
         "@repo/trpc-client": "workspace:*",
         "@repo/types": "workspace:*",
@@ -247,17 +245,6 @@
         "typescript": "^5.9.3",
       },
     },
-    "packages/stripe": {
-      "name": "@repo/stripe",
-      "version": "0.0.0",
-      "dependencies": {
-        "stripe": "^20.3.0",
-      },
-      "devDependencies": {
-        "@repo/tsconfig": "workspace:*",
-        "typescript": "^5.9.3",
-      },
-    },
     "packages/trpc": {
       "name": "@repo/trpc",
       "version": "0.0.0",
@@ -313,7 +300,6 @@
       "version": "0.1.0",
       "dependencies": {
         "@repo/admin": "workspace:*",
-        "@repo/logger": "workspace:*",
         "@repo/storage-client": "workspace:*",
         "@repo/utils": "workspace:*",
         "class-variance-authority": "^0.7.1",
@@ -599,8 +585,6 @@
     "@repo/storage": ["@repo/storage@workspace:packages/storage"],
 
     "@repo/storage-client": ["@repo/storage-client@workspace:packages/storage-client"],
-
-    "@repo/stripe": ["@repo/stripe@workspace:packages/stripe"],
 
     "@repo/trpc": ["@repo/trpc@workspace:packages/trpc"],
 
@@ -1661,8 +1645,6 @@
     "strip-indent": ["strip-indent@3.0.0", "", { "dependencies": { "min-indent": "^1.0.0" } }, "sha512-laJTa3Jb+VQpaC6DseHhF7dXVqHTfJPCRDaEbid/drOhgitgYku/letMUqOXFoWV0zIIUbjpdH2t+tYj4bQMRQ=="],
 
     "strip-json-comments": ["strip-json-comments@3.1.1", "", {}, "sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig=="],
-
-    "stripe": ["stripe@20.4.1", "", { "peerDependencies": { "@types/node": ">=16" }, "optionalPeers": ["@types/node"] }, "sha512-axCguHItc8Sxt0HC6aSkdVRPffjYPV7EQqZRb2GkIa8FzWDycE7nHJM19C6xAIynH1Qp1/BHiopSi96jGBxT0w=="],
 
     "superstruct": ["superstruct@2.0.2", "", {}, "sha512-uV+TFRZdXsqXTL2pRvujROjdZQ4RAlBUS5BTh9IGm+jTqQntYThciG/qu57Gs69yjnVUSqdxF9YLmSnpupBW9A=="],
 

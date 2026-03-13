@@ -8,7 +8,6 @@ Production-ready monorepo for Laura Herve's artist portfolio with full-stack typ
 - **Modern Stack**: Bun, Hono, SvelteKit
 - **Authentication**: Custom JWT-based auth system
 - **File Storage**: MinIO S3-compatible storage with client-side uploads
-- **Payments**: Stripe integration with webhooks
 - **Database**: Prisma ORM with multi-schema support
 - **Monorepo**: Turborepo for efficient builds and caching
 - **Clean Architecture**: Clear client/server separation
@@ -33,10 +32,6 @@ Copy `.env.example` to `.env` in `apps/backend/`:
 ```bash
 # JWT
 ENCRYPTION_SECRET=your-secret-key-min-32-chars
-
-# Stripe
-STRIPE_SECRET_KEY=sk_test_...
-STRIPE_WEBHOOK_SECRET=whsec_...
 
 # MinIO/S3
 MINIO_ENDPOINT=http://localhost:9000
@@ -69,7 +64,6 @@ TRUSTED_ORIGINS=http://localhost:5173,http://localhost:3002
     ├── logger/           # Logging utilities
     ├── storage/          # MinIO S3 service (server)
     ├── storage-client/   # File upload utilities (client)
-    ├── stripe/           # Stripe integration
     ├── trpc/             # tRPC router + procedures (server)
     ├── trpc-client/      # tRPC client factory (client)
     ├── types/            # Shared TypeScript types
@@ -95,9 +89,8 @@ TRUSTED_ORIGINS=http://localhost:5173,http://localhost:3002
 - Svelte 5+ (with runes)
 - Tailwind CSS 4+
 
-**Storage & Payments**
+**Storage**
 - MinIO (S3-compatible storage)
-- Stripe (payments + webhooks)
 
 ## Core Concepts
 
@@ -131,7 +124,6 @@ Modular router structure in `packages/trpc/src/modules/`:
 - `auth/` - Login, register, verify
 - `user/` - User management
 - `contact/` - Contact form submissions
-- `stripe/` - Payment processing
 - `media/` - File upload URLs
 - `chat/` - Messaging system
 
@@ -263,31 +255,7 @@ const { url, key } = await uploadFile(file, presignedUrl, {
 
 **Why direct uploads?** Reduces backend load, faster uploads, better scalability.
 
-### 5. Stripe Integration
-
-**Setup:**
-- `@repo/stripe` - Stripe SDK wrapper
-- `packages/trpc/src/modules/stripe/` - tRPC endpoints
-- `apps/backend/src/handlers/stripe.ts` - Webhook handler
-
-**Webhook verification:**
-```typescript
-// POST /webhook
-const signature = req.header('stripe-signature');
-const event = stripe.webhooks.constructEvent(
-  rawBody,
-  signature,
-  STRIPE_WEBHOOK_SECRET
-);
-```
-
-**Events handled:**
-- `checkout.session.completed`
-- `customer.subscription.created`
-- `customer.subscription.updated`
-- `customer.subscription.deleted`
-
-### 6. Database (Prisma)
+### 5. Database (Prisma)
 
 **Multi-schema setup:**
 
@@ -298,7 +266,6 @@ packages/database/prisma/schema/
 ├── account.prisma      # OAuth accounts
 ├── session.prisma      # Sessions
 ├── contact.prisma      # Contact form
-├── stripe.prisma       # Stripe data
 └── media.prisma        # Uploaded files
 ```
 
@@ -506,8 +473,6 @@ This boilerplate is designed with these principles:
 - Custom JWT authentication system
 - Role-based access control
 - File uploads with progress tracking
-- Stripe payment integration
-- Webhook handling (Stripe)
 - Email validation
 - Password reset flow (TODO)
 - OAuth integration (TODO)
