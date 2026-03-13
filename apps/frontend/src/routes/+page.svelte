@@ -66,13 +66,13 @@
     <div class="text-xl font-light tracking-widest">LAURA HERVE</div>
 
     <div class="flex items-center gap-8 text-sm font-light uppercase tracking-wider">
-      <button on:click={() => scrollTo('galerie')} class="hover:opacity-50 transition"
+      <button onclick={() => scrollTo('galerie')} class="hover:opacity-50 transition"
         >Galerie</button
       >
-      <button on:click={() => scrollTo('apropos')} class="hover:opacity-50 transition"
+      <button onclick={() => scrollTo('apropos')} class="hover:opacity-50 transition"
         >À propos</button
       >
-      <button on:click={() => scrollTo('contact')} class="hover:opacity-50 transition"
+      <button onclick={() => scrollTo('contact')} class="hover:opacity-50 transition"
         >Contact</button
       >
     </div>
@@ -89,7 +89,7 @@
     </p>
 
     <button
-      on:click={() => scrollTo('galerie')}
+      onclick={() => scrollTo('galerie')}
       class="group flex items-center gap-3 text-sm font-light uppercase tracking-widest border border-black px-8 py-4 hover:bg-black hover:text-white transition-all duration-300"
     >
       Découvrir mon travail
@@ -232,7 +232,7 @@
         {/if}
       </div>
 
-      <form on:submit|preventDefault={handleSubmit} class="w-full md:w-[450px] space-y-4">
+      <form onsubmit={(e) => { e.preventDefault(); handleSubmit(); }} class="w-full md:w-[450px] space-y-4">
         <div class="grid grid-cols-2 gap-4">
           <input
             bind:value={firstName}

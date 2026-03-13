@@ -244,8 +244,9 @@
 				class="space-y-4"
 			>
 				<div>
-					<label class="block text-sm font-bold mb-2">Title *</label>
+					<label for="create-title" class="block text-sm font-bold mb-2">Title *</label>
 					<Input
+						id="create-title"
 						type="text"
 						bind:value={createForm.title}
 						placeholder="Enter title"
@@ -255,8 +256,9 @@
 				</div>
 
 				<div>
-					<label class="block text-sm font-bold mb-2">Date *</label>
+					<label for="create-date" class="block text-sm font-bold mb-2">Date *</label>
 					<Input
+						id="create-date"
 						type="text"
 						bind:value={createForm.date}
 						placeholder="e.g., 2024 or January 2024"
@@ -266,8 +268,9 @@
 				</div>
 
 				<div>
-					<label class="block text-sm font-bold mb-2">Description *</label>
+					<label for="create-description" class="block text-sm font-bold mb-2">Description *</label>
 					<textarea
+						id="create-description"
 						bind:value={createForm.description}
 						placeholder="Enter description"
 						required
@@ -277,8 +280,9 @@
 				</div>
 
 				<div>
-					<label class="block text-sm font-bold mb-2">Link (optional)</label>
+					<label for="create-link" class="block text-sm font-bold mb-2">Link (optional)</label>
 					<Input
+						id="create-link"
 						type="url"
 						bind:value={createForm.link}
 						placeholder="https://..."
@@ -287,8 +291,9 @@
 				</div>
 
 				<div>
-					<label class="block text-sm font-bold mb-2">Image *</label>
+					<label for="create-image" class="block text-sm font-bold mb-2">Image *</label>
 					<input
+						id="create-image"
 						type="file"
 						accept="image/*"
 						onchange={handleFileChange}
@@ -333,8 +338,9 @@
 				class="space-y-4"
 			>
 				<div>
-					<label class="block text-sm font-bold mb-2">Title *</label>
+					<label for="edit-title" class="block text-sm font-bold mb-2">Title *</label>
 					<Input
+						id="edit-title"
 						type="text"
 						bind:value={editForm.title}
 						placeholder="Enter title"
@@ -344,8 +350,9 @@
 				</div>
 
 				<div>
-					<label class="block text-sm font-bold mb-2">Date *</label>
+					<label for="edit-date" class="block text-sm font-bold mb-2">Date *</label>
 					<Input
+						id="edit-date"
 						type="text"
 						bind:value={editForm.date}
 						placeholder="e.g., 2024 or January 2024"
@@ -355,8 +362,9 @@
 				</div>
 
 				<div>
-					<label class="block text-sm font-bold mb-2">Description *</label>
+					<label for="edit-description" class="block text-sm font-bold mb-2">Description *</label>
 					<textarea
+						id="edit-description"
 						bind:value={editForm.description}
 						placeholder="Enter description"
 						required
@@ -366,8 +374,8 @@
 				</div>
 
 				<div>
-					<label class="block text-sm font-bold mb-2">Link (optional)</label>
-					<Input type="url" bind:value={editForm.link} placeholder="https://..." class="w-full" />
+					<label for="edit-link" class="block text-sm font-bold mb-2">Link (optional)</label>
+					<Input id="edit-link" type="url" bind:value={editForm.link} placeholder="https://..." class="w-full" />
 				</div>
 
 				<div class="flex gap-3 pt-4">
