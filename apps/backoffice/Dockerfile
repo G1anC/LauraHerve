@@ -23,9 +23,8 @@ ARG VITE_API_URL
 ENV VITE_API_URL=$VITE_API_URL
 
 RUN if [ -z "$VITE_API_URL" ]; then \
-      echo "ERROR: VITE_API_URL is required but not set!"; \
-      echo "Please set VITE_API_URL in Railway environment variables."; \
-      exit 1; \
+      echo "WARNING: VITE_API_URL is not set during build."; \
+      echo "The app will use http://localhost:3001 as fallback."; \
     fi
 
 RUN bun run build --filter=@repo/backoffice
