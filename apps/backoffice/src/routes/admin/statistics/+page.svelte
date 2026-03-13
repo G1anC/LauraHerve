@@ -1,159 +1,110 @@
 <script lang="ts">
-	import { AdminAutoStats } from '@repo/ui';
 	import { trpc } from '$lib/trpc';
 	import { onMount } from 'svelte';
-	import type { UserStats, Contact } from '$lib/types';
+	import 'iconify-icon';
 
 	let loading = $state(true);
-	let userStats: UserStats | null = $state(null);
-	let contactStats: Contact[] | null = $state(null);
+	let galleryItems = $state<any[]>([]);
 
 	onMount(async () => {
-		await Promise.all([fetchUserStats(), fetchContactStats()]);
-		loading = false;
-	});
-
-	async function fetchUserStats() {
 		try {
-			userStats = await trpc.user.getStats.query();
+			galleryItems = await trpc.gallery.listAll.query();
 		} catch (err) {
-			console.error('Failed to fetch user statistics:', err);
+			console.error('Failed to load gallery items:', err);
+		} finally {
+			loading = false;
 		}
-	}
-
-	async function fetchContactStats() {
-		try {
-			contactStats = await trpc.contact.list.query({});
-		} catch (err) {
-			console.error('Failed to fetch contact statistics:', err);
-		}
-	}
-
-	const stats = $derived(() => {
-		if (!userStats) return [];
-		return [
-			{
-				title: 'Total Users',
-				value: userStats.totalUsers || 0,
-				icon: 'solar:users-group-two-rounded-bold',
-				color: 'indigo' as const,
-			},
-			{
-				title: 'Active Users',
-				value: userStats.activeUsers || 0,
-				icon: 'solar:user-check-rounded-bold',
-				color: 'emerald' as const,
-			},
-			{
-				title: 'Suspended',
-				value: userStats.suspendedUsers || 0,
-				icon: 'solar:user-block-rounded-bold',
-				color: 'amber' as const,
-			},
-			{
-				title: 'Banned',
-				value: userStats.bannedUsers || 0,
-				icon: 'solar:user-cross-rounded-bold',
-				color: 'rose' as const,
-			},
-			{
-				title: 'Premium Users',
-				value: userStats.premiumUsers || 0,
-				icon: 'solar:crown-bold',
-				color: 'violet' as const,
-			},
-			{
-				title: 'Total Contacts',
-				value: contactStats?.data?.length || 0,
-				icon: 'solar:letter-bold',
-				color: 'cyan' as const,
-			},
-		];
-	});
-
-	const userGrowthData = $derived(() => {
-		if (!userStats?.userGrowth) return [];
-		return (userStats.userGrowth as Array<{date: string; count: number}>).map((item) => ({
-			x: item.date,
-			y: item.count,
-		}));
-	});
-
-	const userRoleDistribution = $derived(() => {
-		if (!userStats) return [];
-		return [
-			{ label: 'Users', value: (userStats.totalUsers || 0) - (userStats.adminUsers || 0) },
-			{ label: 'Admins', value: userStats.adminUsers || 0 },
-		];
-	});
-
-	const userStatusDistribution = $derived(() => {
-		if (!userStats) return [];
-		return [
-			{ label: 'Active', value: userStats.activeUsers || 0 },
-			{ label: 'Suspended', value: userStats.suspendedUsers || 0 },
-			{ label: 'Banned', value: userStats.bannedUsers || 0 },
-			{ label: 'Pending', value: userStats.pendingUsers || 0 },
-		];
-	});
-
-	const charts = $derived(() => {
-		const chartList = [];
-
-		if (userGrowthData().length > 0) {
-			chartList.push({
-				title: 'User Growth',
-				description: 'New user registrations over time',
-				type: 'area' as const,
-				data: userGrowthData(),
-				x: 'x',
-				y: 'y',
-				color: '#4f46e5',
-				height: 300,
-			});
-		}
-
-		if (userStatusDistribution().some((d) => d.value > 0)) {
-			chartList.push({
-				title: 'User Status Distribution',
-				description: 'Breakdown of users by status',
-				type: 'pie' as const,
-				data: userStatusDistribution(),
-				value: 'value',
-				label: 'label',
-				colors: ['#10b981', '#f59e0b', '#ef4444', '#94a3b8'],
-				height: 300,
-			});
-		}
-
-		if (userRoleDistribution().some((d) => d.value > 0)) {
-			chartList.push({
-				title: 'User Role Distribution',
-				description: 'Breakdown of users by role',
-				type: 'bar' as const,
-				data: userRoleDistribution(),
-				x: 'label',
-				y: 'value',
-				color: '#8b5cf6',
-				height: 300,
-			});
-		}
-
-		return chartList;
 	});
 </script>
 
 <div class="p-8 max-w-[1400px] mx-auto">
+	<div class="mb-8">
+		<h1 class="text-3xl font-black mb-2">Statistics</h1>
+		<p class="text-slate-500">Portfolio overview and analytics</p>
+	</div>
+
 	{#if loading}
 		<div class="flex items-center justify-center py-20">
-			<div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+			<div class="animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
 		</div>
 	{:else}
-		<AdminAutoStats
-			title="Platform Statistics"
-			description="Overview of platform metrics and analytics"
-			stats={stats()}
-			charts={charts()}
-		/>
+		<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+			<div class="bg-white rounded-2xl border-2 border-slate-200 p-8">
+				<div class="flex items-center gap-4 mb-4">
+					<div class="w-12 h-12 rounded-xl bg-black flex items-center justify-center text-white">
+						<iconify-icon icon="solar:gallery-bold" width="24"></iconify-icon>
+					</div>
+					<div>
+						<p class="text-sm text-slate-500 font-bold">Gallery Items</p>
+						<p class="text-3xl font-black">{galleryItems.length}/4</p>
+					</div>
+				</div>
+				<div class="mt-4 pt-4 border-t border-slate-100">
+					<p class="text-xs text-slate-400">
+						{4 - galleryItems.length} slots remaining
+					</p>
+				</div>
+			</div>
+
+			<div class="bg-white rounded-2xl border-2 border-slate-200 p-8">
+				<div class="flex items-center gap-4 mb-4">
+					<div class="w-12 h-12 rounded-xl bg-black flex items-center justify-center text-white">
+						<iconify-icon icon="solar:chart-bold" width="24"></iconify-icon>
+					</div>
+					<div>
+						<p class="text-sm text-slate-500 font-bold">Portfolio Status</p>
+						<p class="text-xl font-black">
+							{galleryItems.length === 0 ? 'Empty' : galleryItems.length === 4 ? 'Full' : 'Active'}
+						</p>
+					</div>
+				</div>
+				<div class="mt-4 pt-4 border-t border-slate-100">
+					<p class="text-xs text-slate-400">
+						{galleryItems.length === 4
+							? 'Gallery is at maximum capacity'
+							: 'Add more items to showcase your work'}
+					</p>
+				</div>
+			</div>
+
+			<div class="bg-white rounded-2xl border-2 border-slate-200 p-8">
+				<div class="flex items-center gap-4 mb-4">
+					<div class="w-12 h-12 rounded-xl bg-black flex items-center justify-center text-white">
+						<iconify-icon icon="solar:palette-bold" width="24"></iconify-icon>
+					</div>
+					<div>
+						<p class="text-sm text-slate-500 font-bold">Theme</p>
+						<p class="text-xl font-black">Minimalist</p>
+					</div>
+				</div>
+				<div class="mt-4 pt-4 border-t border-slate-100">
+					<p class="text-xs text-slate-400">Black & white design system</p>
+				</div>
+			</div>
+		</div>
+
+		{#if galleryItems.length > 0}
+			<div class="mt-8">
+				<h2 class="text-xl font-black mb-4">Gallery Overview</h2>
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+					{#each galleryItems as item}
+						<div class="bg-white rounded-2xl border-2 border-slate-200 p-4 flex gap-4">
+							<div class="w-20 h-20 rounded-xl bg-slate-100 overflow-hidden flex-shrink-0">
+								<img
+									src={item.media.url}
+									alt={item.title}
+									class="w-full h-full object-cover"
+								/>
+							</div>
+							<div class="flex-1 min-w-0">
+								<h3 class="font-black text-sm truncate">{item.title}</h3>
+								<p class="text-xs text-slate-400 truncate">{item.date}</p>
+								<p class="text-xs text-slate-500 mt-2 line-clamp-2">{item.description}</p>
+							</div>
+						</div>
+					{/each}
+				</div>
+			</div>
+		{/if}
 	{/if}
 </div>

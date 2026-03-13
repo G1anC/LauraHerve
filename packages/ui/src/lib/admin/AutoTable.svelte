@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { EntityConfig, ListResult } from '@repo/admin';
-  import { downloadCSV, toast } from '@repo/utils';
+  import { downloadCSV } from '@repo/utils';
+  import { toast } from '../toastStore';
   import Pagination from '../../components/molecules/Pagination.svelte';
   import { cn } from '@repo/utils';
   import 'iconify-icon';

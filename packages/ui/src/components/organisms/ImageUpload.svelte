@@ -1,6 +1,6 @@
 <script lang="ts">
     import { uploadFileSimple } from '@repo/storage-client';
-    import { toast } from '@repo/utils';
+    import { toast } from '../../lib/toastStore';
     import 'iconify-icon';
 
     export let value: string = "";

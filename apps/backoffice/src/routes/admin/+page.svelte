@@ -91,13 +91,13 @@
   }
 
   .entity-card:hover {
-    border-color: #3b82f6;
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+    border-color: #000000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transform: translateY(-2px);
   }
 
   .entity-icon {
-    color: #3b82f6;
+    color: #000000;
     margin-bottom: 1rem;
   }
 

@@ -2,7 +2,7 @@
   import { page } from '$app/stores';
   import { trpc } from '$lib/trpc';
   import { AdminAutoTable, AdminAutoForm, Modal, Button, Spinner, Alert, Input } from '@repo/ui';
-  import { toast } from '@repo/utils';
+  import { toast } from '@repo/ui';
   import type { EntityConfig, ListResult } from '@repo/admin';
   import { onMount } from 'svelte';
   import 'iconify-icon';

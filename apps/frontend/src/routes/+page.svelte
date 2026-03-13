@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { trpc } from '$lib/trpc';
+  import FullscreenCarousel from '$lib/components/FullscreenCarousel.svelte';
   import 'iconify-icon';
 
   let email = '',
@@ -13,11 +14,18 @@
   let aboutContent = '';
   let socialLinks = { instagram: '', facebook: '', email: '' };
   let dataLoading = true;
+  let showCarousel = false;
+  let carouselStartIndex = 0;
 
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
+
+  function openCarousel(index: number) {
+    carouselStartIndex = index;
+    showCarousel = true;
+  }
 
   onMount(async () => {
     try {
@@ -111,9 +119,12 @@
           <p class="text-sm mt-2">Revenez bientôt pour découvrir mes créations.</p>
         </div>
       {:else}
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {#each galleryItems as item}
-            <div class="group relative overflow-hidden bg-neutral-50 aspect-square">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          {#each galleryItems as item, idx}
+            <button
+              onclick={() => openCarousel(idx)}
+              class="group relative overflow-hidden bg-neutral-50 aspect-square cursor-pointer"
+            >
               {#if item.media?.url}
                 <img
                   src={item.media.url}
@@ -125,28 +136,16 @@
               <div
                 class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white"
               >
+                <div class="flex items-center gap-2 mb-3 text-sm uppercase tracking-wider opacity-70">
+                  <iconify-icon icon="solar:eye-bold" width="20"></iconify-icon>
+                  Cliquez pour voir en plein écran
+                </div>
                 <h3 class="text-2xl font-light mb-2">{item.title}</h3>
-                {#if item.description}
-                  <p class="text-sm font-light opacity-90 line-clamp-3 mb-3">
-                    {item.description}
-                  </p>
-                {/if}
                 {#if item.date}
                   <p class="text-xs uppercase tracking-wider opacity-70">{item.date}</p>
                 {/if}
-                {#if item.link}
-                  <a
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="mt-4 inline-flex items-center gap-2 text-sm uppercase tracking-wider hover:underline"
-                  >
-                    En savoir plus
-                    <iconify-icon icon="solar:arrow-right-line-duotone" width="16"></iconify-icon>
-                  </a>
-                {/if}
               </div>
-            </div>
+            </button>
           {/each}
         </div>
       {/if}
@@ -289,6 +288,14 @@
     </div>
   </footer>
 </div>
+
+{#if showCarousel && galleryItems.length > 0}
+  <FullscreenCarousel
+    items={galleryItems}
+    initialIndex={carouselStartIndex}
+    onClose={() => (showCarousel = false)}
+  />
+{/if}
 
 <style>
   :global(html) {

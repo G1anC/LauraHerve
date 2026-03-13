@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { toast } from '@repo/utils';
+    import { toast } from '../../lib/toastStore';
     import { flip } from 'svelte/animate';
     import { fly } from 'svelte/transition';
     import 'iconify-icon';

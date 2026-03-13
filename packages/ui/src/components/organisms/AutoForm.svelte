@@ -2,7 +2,7 @@
   import { z } from 'zod';
   import { zod } from 'sveltekit-superforms/adapters';
   import { superForm, defaults } from 'sveltekit-superforms/client';
-  import { toast } from '@repo/utils';
+  import { toast } from '../../lib/toastStore';
   import 'iconify-icon';
 
   import Button from '../atoms/Button.svelte';

@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { downloadCSV, toast } from '@repo/utils';
+    import { downloadCSV } from '@repo/utils';
+    import { toast } from '../../lib/toastStore';
     import 'iconify-icon';
 
     export let entityName: string;

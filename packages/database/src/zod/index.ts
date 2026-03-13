@@ -1,6 +1,13 @@
 import { z } from 'zod';
 import { Prisma } from '@prisma/client';
 
+/////////////////////////////////////////
+// HELPER FUNCTIONS
+/////////////////////////////////////////
+
+// JSON
+//------------------------------------------------------
+
 export type NullableJsonInput = Prisma.JsonValue | null | 'JsonNull' | 'DbNull' | Prisma.NullTypes.DbNull | Prisma.NullTypes.JsonNull;
 
 export const transformJsonNull = (v?: NullableJsonInput) => {
@@ -42,6 +49,11 @@ export const InputJsonValueSchema: z.ZodType<Prisma.InputJsonValue> = z.lazy(() 
 
 export type InputJsonValueType = z.infer<typeof InputJsonValueSchema>;
 
+
+/////////////////////////////////////////
+// ENUMS
+/////////////////////////////////////////
+
 export const TransactionIsolationLevelSchema = z.enum(['ReadUncommitted','ReadCommitted','RepeatableRead','Serializable']);
 
 export const AboutSectionScalarFieldEnumSchema = z.enum(['id','content','createdAt','updatedAt']);
@@ -82,6 +94,14 @@ export const UserStatusSchema = z.enum(['ACTIVE']);
 
 export type UserStatusType = `${z.infer<typeof UserStatusSchema>}`
 
+/////////////////////////////////////////
+// MODELS
+/////////////////////////////////////////
+
+/////////////////////////////////////////
+// ABOUT SECTION SCHEMA
+/////////////////////////////////////////
+
 export const AboutSectionSchema = z.object({
   id: z.string(),
   content: z.string(),
@@ -90,6 +110,10 @@ export const AboutSectionSchema = z.object({
 })
 
 export type AboutSection = z.infer<typeof AboutSectionSchema>
+
+/////////////////////////////////////////
+// ACCOUNT SCHEMA
+/////////////////////////////////////////
 
 export const AccountSchema = z.object({
   id: z.string(),
@@ -109,6 +133,9 @@ export const AccountSchema = z.object({
 
 export type Account = z.infer<typeof AccountSchema>
 
+// ACCOUNT RELATION SCHEMA
+//------------------------------------------------------
+
 export type AccountRelations = {
   user: UserWithRelations;
 };
@@ -118,6 +145,10 @@ export type AccountWithRelations = z.infer<typeof AccountSchema> & AccountRelati
 export const AccountWithRelationsSchema: z.ZodType<AccountWithRelations> = AccountSchema.merge(z.object({
   user: z.lazy(() => UserWithRelationsSchema),
 }))
+
+/////////////////////////////////////////
+// AUDIT LOG SCHEMA
+/////////////////////////////////////////
 
 export const AuditLogSchema = z.object({
   action: AuditActionSchema,
@@ -133,6 +164,9 @@ export const AuditLogSchema = z.object({
 
 export type AuditLog = z.infer<typeof AuditLogSchema>
 
+// AUDIT LOG RELATION SCHEMA
+//------------------------------------------------------
+
 export type AuditLogRelations = {
   user: UserWithRelations;
 };
@@ -144,6 +178,10 @@ export type AuditLogWithRelations = Omit<z.infer<typeof AuditLogSchema>, "change
 export const AuditLogWithRelationsSchema: z.ZodType<AuditLogWithRelations> = AuditLogSchema.merge(z.object({
   user: z.lazy(() => UserWithRelationsSchema),
 }))
+
+/////////////////////////////////////////
+// GALLERY ITEM SCHEMA
+/////////////////////////////////////////
 
 export const GalleryItemSchema = z.object({
   id: z.string(),
@@ -159,6 +197,9 @@ export const GalleryItemSchema = z.object({
 
 export type GalleryItem = z.infer<typeof GalleryItemSchema>
 
+// GALLERY ITEM RELATION SCHEMA
+//------------------------------------------------------
+
 export type GalleryItemRelations = {
   media: MediaWithRelations;
 };
@@ -168,6 +209,10 @@ export type GalleryItemWithRelations = z.infer<typeof GalleryItemSchema> & Galle
 export const GalleryItemWithRelationsSchema: z.ZodType<GalleryItemWithRelations> = GalleryItemSchema.merge(z.object({
   media: z.lazy(() => MediaWithRelationsSchema),
 }))
+
+/////////////////////////////////////////
+// MEDIA SCHEMA
+/////////////////////////////////////////
 
 export const MediaSchema = z.object({
   id: z.string(),
@@ -180,6 +225,9 @@ export const MediaSchema = z.object({
 
 export type Media = z.infer<typeof MediaSchema>
 
+// MEDIA RELATION SCHEMA
+//------------------------------------------------------
+
 export type MediaRelations = {
   galleryItem?: GalleryItemWithRelations | null;
 };
@@ -189,6 +237,10 @@ export type MediaWithRelations = z.infer<typeof MediaSchema> & MediaRelations
 export const MediaWithRelationsSchema: z.ZodType<MediaWithRelations> = MediaSchema.merge(z.object({
   galleryItem: z.lazy(() => GalleryItemWithRelationsSchema).nullable(),
 }))
+
+/////////////////////////////////////////
+// SESSION SCHEMA
+/////////////////////////////////////////
 
 export const SessionSchema = z.object({
   id: z.string(),
@@ -203,6 +255,9 @@ export const SessionSchema = z.object({
 
 export type Session = z.infer<typeof SessionSchema>
 
+// SESSION RELATION SCHEMA
+//------------------------------------------------------
+
 export type SessionRelations = {
   user: UserWithRelations;
 };
@@ -212,6 +267,10 @@ export type SessionWithRelations = z.infer<typeof SessionSchema> & SessionRelati
 export const SessionWithRelationsSchema: z.ZodType<SessionWithRelations> = SessionSchema.merge(z.object({
   user: z.lazy(() => UserWithRelationsSchema),
 }))
+
+/////////////////////////////////////////
+// SOCIAL LINKS SCHEMA
+/////////////////////////////////////////
 
 export const SocialLinksSchema = z.object({
   id: z.string(),
@@ -223,6 +282,10 @@ export const SocialLinksSchema = z.object({
 })
 
 export type SocialLinks = z.infer<typeof SocialLinksSchema>
+
+/////////////////////////////////////////
+// USER SCHEMA
+/////////////////////////////////////////
 
 export const UserSchema = z.object({
   role: UserRoleSchema,
@@ -240,6 +303,9 @@ export const UserSchema = z.object({
 
 export type User = z.infer<typeof UserSchema>
 
+// USER RELATION SCHEMA
+//------------------------------------------------------
+
 export type UserRelations = {
   sessions: SessionWithRelations[];
   accounts: AccountWithRelations[];
@@ -254,12 +320,22 @@ export const UserWithRelationsSchema: z.ZodType<UserWithRelations> = UserSchema.
   auditLogs: z.lazy(() => AuditLogWithRelationsSchema).array(),
 }))
 
+/////////////////////////////////////////
+// SELECT & INCLUDE
+/////////////////////////////////////////
+
+// ABOUT SECTION
+//------------------------------------------------------
+
 export const AboutSectionSelectSchema: z.ZodType<Prisma.AboutSectionSelect> = z.object({
   id: z.boolean().optional(),
   content: z.boolean().optional(),
   createdAt: z.boolean().optional(),
   updatedAt: z.boolean().optional(),
 }).strict()
+
+// ACCOUNT
+//------------------------------------------------------
 
 export const AccountIncludeSchema: z.ZodType<Prisma.AccountInclude> = z.object({
   user: z.union([z.boolean(),z.lazy(() => UserArgsSchema)]).optional(),
@@ -287,6 +363,9 @@ export const AccountSelectSchema: z.ZodType<Prisma.AccountSelect> = z.object({
   user: z.union([z.boolean(),z.lazy(() => UserArgsSchema)]).optional(),
 }).strict()
 
+// AUDIT LOG
+//------------------------------------------------------
+
 export const AuditLogIncludeSchema: z.ZodType<Prisma.AuditLogInclude> = z.object({
   user: z.union([z.boolean(),z.lazy(() => UserArgsSchema)]).optional(),
 }).strict();
@@ -308,6 +387,9 @@ export const AuditLogSelectSchema: z.ZodType<Prisma.AuditLogSelect> = z.object({
   createdAt: z.boolean().optional(),
   user: z.union([z.boolean(),z.lazy(() => UserArgsSchema)]).optional(),
 }).strict()
+
+// GALLERY ITEM
+//------------------------------------------------------
 
 export const GalleryItemIncludeSchema: z.ZodType<Prisma.GalleryItemInclude> = z.object({
   media: z.union([z.boolean(),z.lazy(() => MediaArgsSchema)]).optional(),
@@ -331,6 +413,9 @@ export const GalleryItemSelectSchema: z.ZodType<Prisma.GalleryItemSelect> = z.ob
   media: z.union([z.boolean(),z.lazy(() => MediaArgsSchema)]).optional(),
 }).strict()
 
+// MEDIA
+//------------------------------------------------------
+
 export const MediaIncludeSchema: z.ZodType<Prisma.MediaInclude> = z.object({
   galleryItem: z.union([z.boolean(),z.lazy(() => GalleryItemArgsSchema)]).optional(),
 }).strict();
@@ -349,6 +434,9 @@ export const MediaSelectSchema: z.ZodType<Prisma.MediaSelect> = z.object({
   createdAt: z.boolean().optional(),
   galleryItem: z.union([z.boolean(),z.lazy(() => GalleryItemArgsSchema)]).optional(),
 }).strict()
+
+// SESSION
+//------------------------------------------------------
 
 export const SessionIncludeSchema: z.ZodType<Prisma.SessionInclude> = z.object({
   user: z.union([z.boolean(),z.lazy(() => UserArgsSchema)]).optional(),
@@ -371,6 +459,9 @@ export const SessionSelectSchema: z.ZodType<Prisma.SessionSelect> = z.object({
   user: z.union([z.boolean(),z.lazy(() => UserArgsSchema)]).optional(),
 }).strict()
 
+// SOCIAL LINKS
+//------------------------------------------------------
+
 export const SocialLinksSelectSchema: z.ZodType<Prisma.SocialLinksSelect> = z.object({
   id: z.boolean().optional(),
   instagram: z.boolean().optional(),
@@ -379,6 +470,9 @@ export const SocialLinksSelectSchema: z.ZodType<Prisma.SocialLinksSelect> = z.ob
   createdAt: z.boolean().optional(),
   updatedAt: z.boolean().optional(),
 }).strict()
+
+// USER
+//------------------------------------------------------
 
 export const UserIncludeSchema: z.ZodType<Prisma.UserInclude> = z.object({
   sessions: z.union([z.boolean(),z.lazy(() => SessionFindManyArgsSchema)]).optional(),
@@ -419,6 +513,11 @@ export const UserSelectSchema: z.ZodType<Prisma.UserSelect> = z.object({
   auditLogs: z.union([z.boolean(),z.lazy(() => AuditLogFindManyArgsSchema)]).optional(),
   _count: z.union([z.boolean(),z.lazy(() => UserCountOutputTypeArgsSchema)]).optional(),
 }).strict()
+
+
+/////////////////////////////////////////
+// INPUT TYPES
+/////////////////////////////////////////
 
 export const AboutSectionWhereInputSchema: z.ZodType<Prisma.AboutSectionWhereInput> = z.object({
   AND: z.union([ z.lazy(() => AboutSectionWhereInputSchema), z.lazy(() => AboutSectionWhereInputSchema).array() ]).optional(),
@@ -3440,6 +3539,10 @@ export const AuditLogUncheckedUpdateManyWithoutUserInputSchema: z.ZodType<Prisma
   userAgent: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
 }).strict();
+
+/////////////////////////////////////////
+// ARGS
+/////////////////////////////////////////
 
 export const AboutSectionFindFirstArgsSchema: z.ZodType<Prisma.AboutSectionFindFirstArgs> = z.object({
   select: AboutSectionSelectSchema.optional(),

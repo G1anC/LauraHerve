@@ -36,3 +36,6 @@ export { default as AdminAutoStats } from './lib/admin/AutoStats.svelte';
 export { default as CommandPalette } from './lib/command-palette/CommandPalette.svelte';
 export { commandRegistry } from './lib/command-palette/registry';
 export type { Command } from './lib/command-palette/registry';
+
+export { toast } from './lib/toastStore';
+export type { Toast, ToastType } from './lib/toastStore';

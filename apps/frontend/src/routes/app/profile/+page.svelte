@@ -4,7 +4,7 @@
   import { onMount } from 'svelte';
   import { fade, scale, fly } from 'svelte/transition';
   import { uploadFileSimple } from '@repo/storage-client';
-  import { toast } from '@repo/utils';
+  import { toast } from '@repo/ui';
   import 'iconify-icon';
 
   interface UserData {
