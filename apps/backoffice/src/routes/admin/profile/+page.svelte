@@ -9,7 +9,7 @@ import 'iconify-icon';
     <div class="mb-10 flex items-center justify-between">
       <div>
         <button
-          on:click={() => history.back()}
+          onclick={() => history.back()}
           class="text-slate-500 hover:text-indigo-600 flex items-center gap-2 mb-4 font-bold transition-colors group"
         >
           <iconify-icon icon="solar:alt-arrow-left-bold" class="group-hover:-translate-x-1 transition-transform"></iconify-icon>
@@ -70,7 +70,7 @@ import 'iconify-icon';
 
           <div class="flex flex-col md:flex-row gap-4">
             <button
-            on:click={() => authStore.logout()}
+            onclick={() => authStore.logout()}
               class="bg-red-50 text-red-600 py-4 px-8 rounded-2xl hover:bg-red-600 hover:text-white transition-all cursor-pointer flex items-center justify-center gap-2 font-black shadow-sm active:scale-95"
             >
               <iconify-icon icon="solar:logout-2-bold" width="20"></iconify-icon>

@@ -23,8 +23,8 @@
 {#if open}
   <dialog
     bind:this={dialog}
-    on:close={close}
-    on:click|self={close}
+    onclose={close}
+    onclick={(e) => { if (e.target === e.currentTarget) close(); }}
     class="w-full h-screen bg-transparent outline-none backdrop:bg-slate-950/30 backdrop:backdrop-blur-sm p-4 outline-none flex items-center justify-center z-50" >
     <div
       in:scale={{ start: 0.95, duration: 200 }}
@@ -33,7 +33,7 @@
     >
       <header class="p-6 flex justify-between items-center">
         <h3 class="font-bold uppercase tracking-tighter text-xl text-slate-900">{title}</h3>
-        <button on:click={close} class="text-slate-300 hover:text-rose-500 transition-colors" aria-label="Close modal">
+        <button onclick={close} class="text-slate-300 hover:text-rose-500 transition-colors" aria-label="Close modal">
           <iconify-icon icon="solar:close-circle-bold" width="28"></iconify-icon>
         </button>
       </header>

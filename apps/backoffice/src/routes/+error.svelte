@@ -7,7 +7,7 @@
   $: status = $page.status;
   $: message = $page.error?.message || 'Unauthorized Action';
 
-  const goDashboard = () => goto(resolve('/admin/contacts'));
+  const goDashboard = () => goto(resolve('/admin'));
   const goBack = () => window.history.back();
 </script>
 
@@ -60,7 +60,7 @@
 
         <div class="flex flex-col gap-4">
           <button
-            on:click={goDashboard}
+            onclick={goDashboard}
             class="w-full px-8 py-5 bg-black text-white font-black uppercase tracking-widest rounded-2xl hover:bg-neutral-800 transition active:scale-95 flex items-center justify-center gap-3"
           >
             <iconify-icon icon="solar:widget-4-bold" width="20"></iconify-icon>
@@ -68,7 +68,7 @@
           </button>
 
           <button
-            on:click={goBack}
+            onclick={goBack}
             class="w-full px-8 py-5 bg-white text-black border border-neutral-200 font-black uppercase tracking-widest rounded-2xl hover:bg-neutral-50 transition active:scale-95 flex items-center justify-center gap-3"
           >
             <iconify-icon icon="solar:undo-left-round-bold" width="20"></iconify-icon>

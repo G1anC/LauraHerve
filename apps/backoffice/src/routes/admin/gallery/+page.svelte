@@ -233,7 +233,7 @@
 </div>
 
 {#if showCreateModal}
-	<Modal onClose={() => (showCreateModal = false)}>
+	<Modal open={showCreateModal} onClose={() => (showCreateModal = false)}>
 		<div class="p-6">
 			<h2 class="text-2xl font-black mb-6">Create Gallery Item</h2>
 			<form
@@ -327,7 +327,7 @@
 {/if}
 
 {#if showEditModal}
-	<Modal onClose={() => (showEditModal = false)}>
+	<Modal open={showEditModal} onClose={() => (showEditModal = false)}>
 		<div class="p-6">
 			<h2 class="text-2xl font-black mb-6">Edit Gallery Item</h2>
 			<form

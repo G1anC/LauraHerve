@@ -38,7 +38,7 @@
             </div>
 
             <button
-                on:click={() => toast.remove(t.id)}
+                onclick={() => toast.remove(t.id)}
                 class="text-slate-300 hover:text-slate-900 transition-colors p-1"
                 aria-label="Close notification"
             >

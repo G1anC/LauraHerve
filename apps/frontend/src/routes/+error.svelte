@@ -59,7 +59,7 @@
 
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <button
-            on:click={goHome}
+            onclick={goHome}
             class="group relative px-8 py-3 bg-primary text-white font-semibold rounded-lg shadow-lg hover:bg-primary-hover transition-all duration-200 hover:scale-105 active:scale-95 flex items-center gap-2"
           >
             <iconify-icon icon="solar:home-2-bold" width="20"></iconify-icon>
@@ -72,7 +72,7 @@
           </button>
 
           <button
-            on:click={goBack}
+            onclick={goBack}
             class="px-8 py-3 bg-white text-primary font-semibold rounded-lg shadow-md hover:shadow-lg border-2 border-primary transition-all duration-200 hover:scale-105 active:scale-95 flex items-center gap-2"
           >
             <iconify-icon icon="solar:arrow-left-bold" width="20"></iconify-icon>

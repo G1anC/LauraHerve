@@ -33,7 +33,7 @@
   {:else}
     <div class="entity-grid">
       {#each entities as entity (entity)}
-        <button class="entity-card" on:click={() => navigateToEntity(entity)}>
+        <button class="entity-card" onclick={() => navigateToEntity(entity)}>
           <div class="entity-icon">
             <iconify-icon icon="mdi:database" width="32"></iconify-icon>
           </div>

@@ -33,7 +33,7 @@
                 { token },
                 user as SessionUser
             );
-            goto(resolve('/admin/contacts'));
+            goto(resolve('/admin'));
         } catch (err) {
             console.error('Login error:', err);
             error = err instanceof Error ? err.message : "Une erreur est survenue lors de la connexion";
@@ -55,7 +55,7 @@
                 <p class="text-slate-400 font-medium">Connectez-vous pour gérer le site</p>
             </div>
 
-            <form on:submit|preventDefault={handleLogin} class="space-y-4">
+            <form onsubmit={(e) => { e.preventDefault(); handleLogin(); }} class="space-y-4">
                 <Input
                     type="email"
                     bind:value={email}
