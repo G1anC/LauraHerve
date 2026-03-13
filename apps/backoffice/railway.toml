@@ -1,6 +1,7 @@
 [build]
 builder = "dockerfile"
 dockerfilePath = "apps/backoffice/Dockerfile"
+watchPaths = ["apps/backoffice/**", "packages/**"]
 
 [deploy]
 restartPolicyType = "on_failure"

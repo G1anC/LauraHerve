@@ -1,6 +1,7 @@
 [build]
 builder = "dockerfile"
 dockerfilePath = "apps/frontend/Dockerfile"
+watchPaths = ["apps/frontend/**", "packages/**"]
 
 [deploy]
 restartPolicyType = "on_failure"
