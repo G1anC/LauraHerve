@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Modal, Badge, Spinner, Tabs } from '@repo/ui';
 	import { trpc } from '$lib/trpc';
-	import { logger } from '@repo/logger';
 	import type { UserDetail } from '$lib/types';
 	import 'iconify-icon';
 
@@ -29,7 +28,7 @@
 		try {
 			user = await trpc.user.getById.query({ id: userId });
 		} catch (err) {
-			logger.error({ err }, 'Failed to load user details');
+			console.error('Failed to load user details:', err);
 		} finally {
 			loading = false;
 		}
@@ -48,7 +47,7 @@
 			await loadUser();
 			banReason = '';
 		} catch (err) {
-			logger.error({ err }, 'Failed to ban user');
+			console.error('Failed to ban user:', err);
 			alert('Failed to ban user');
 		} finally {
 			actionLoading = false;
@@ -63,7 +62,7 @@
 			await trpc.user.unban.mutate({ id: userId });
 			await loadUser();
 		} catch (err) {
-			logger.error({ err }, 'Failed to unban user');
+			console.error('Failed to unban user:', err);
 			alert('Failed to unban user');
 		} finally {
 			actionLoading = false;
@@ -86,7 +85,7 @@
 			await loadUser();
 			suspensionReason = '';
 		} catch (err) {
-			logger.error({ err }, 'Failed to suspend user');
+			console.error('Failed to suspend user:', err);
 			alert('Failed to suspend user');
 		} finally {
 			actionLoading = false;
@@ -101,7 +100,7 @@
 			await trpc.user.unsuspend.mutate({ id: userId });
 			await loadUser();
 		} catch (err) {
-			logger.error({ err }, 'Failed to unsuspend user');
+			console.error('Failed to unsuspend user:', err);
 			alert('Failed to unsuspend user');
 		} finally {
 			actionLoading = false;
@@ -116,7 +115,7 @@
 			await trpc.user.verifyEmail.mutate({ id: userId });
 			await loadUser();
 		} catch (err) {
-			logger.error({ err }, 'Failed to verify user email');
+			console.error('Failed to verify user email:', err);
 			alert('Failed to verify email');
 		} finally {
 			actionLoading = false;

@@ -2,7 +2,6 @@
 	import { AdminAutoStats } from '@repo/ui';
 	import { trpc } from '$lib/trpc';
 	import { onMount } from 'svelte';
-	import { logger } from '@repo/logger';
 	import type { UserStats, Contact } from '$lib/types';
 
 	let loading = $state(true);
@@ -18,7 +17,7 @@
 		try {
 			userStats = await trpc.user.getStats.query();
 		} catch (err) {
-			logger.error({ err }, 'Failed to fetch user statistics');
+			console.error('Failed to fetch user statistics:', err);
 		}
 	}
 
@@ -26,7 +25,7 @@
 		try {
 			contactStats = await trpc.contact.list.query({});
 		} catch (err) {
-			logger.error({ err }, 'Failed to fetch contact statistics');
+			console.error('Failed to fetch contact statistics:', err);
 		}
 	}
 

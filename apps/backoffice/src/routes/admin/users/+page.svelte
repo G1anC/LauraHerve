@@ -3,7 +3,6 @@
 	import { onMount } from 'svelte';
 	import UserDetailModal from '$lib/components/UserDetailModal.svelte';
 	import { Spinner, SearchInput, Badge, EmptyState } from '@repo/ui';
-	import { logger } from '@repo/logger';
 	import type { User, UserStats } from '$lib/types';
 	import 'iconify-icon';
 
@@ -29,7 +28,7 @@
 		try {
 			users = await trpc.user.list.query(filters);
 		} catch (err) {
-			logger.error({ err }, 'Failed to fetch users');
+			console.error('Failed to fetch users:', err);
 		} finally {
 			pageLoading = false;
 		}
@@ -39,7 +38,7 @@
 		try {
 			stats = await trpc.user.getStats.query();
 		} catch (err) {
-			logger.error({ err }, 'Failed to fetch user statistics');
+			console.error('Failed to fetch user statistics:', err);
 		}
 	}
 
@@ -54,7 +53,7 @@
 			users = users.filter(u => u.id !== id);
 			await fetchStats();
 		} catch (err) {
-			logger.error({ err }, 'Failed to delete user');
+			console.error('Failed to delete user:', err);
 			alert('Failed to delete user');
 		}
 	};
@@ -64,7 +63,7 @@
 			await trpc.user.update.mutate({ id, isPremium: !current });
 			users = users.map(u => u.id === id ? { ...u, isPremium: !current } : u);
 		} catch (err) {
-			logger.error({ err }, 'Failed to update premium status');
+			console.error('Failed to update premium status:', err);
 			alert('Failed to update premium status');
 		}
 	};
@@ -75,7 +74,7 @@
 			await trpc.user.update.mutate({ id, role: newRole });
 			users = users.map(u => u.id === id ? { ...u, role: newRole } : u);
 		} catch (err) {
-			logger.error({ err }, 'Failed to update user role');
+			console.error('Failed to update user role:', err);
 			alert('Failed to update role');
 		}
 	};
@@ -92,7 +91,7 @@
 			banningUserId = '';
 			banReason = '';
 		} catch (err) {
-			logger.error({ err }, 'Failed to ban user');
+			console.error('Failed to ban user:', err);
 			alert('Failed to ban user');
 		}
 	};
@@ -104,7 +103,7 @@
 			await fetchUsers();
 			await fetchStats();
 		} catch (err) {
-			logger.error({ err }, 'Failed to unban user');
+			console.error('Failed to unban user:', err);
 			alert('Failed to unban user');
 		}
 	};
@@ -114,7 +113,7 @@
 			await trpc.user.verifyEmail.mutate({ id });
 			users = users.map(u => u.id === id ? { ...u, emailVerified: true } : u);
 		} catch (err) {
-			logger.error({ err }, 'Failed to verify email');
+			console.error('Failed to verify email:', err);
 			alert('Failed to verify email');
 		}
 	};

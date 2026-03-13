@@ -5,7 +5,6 @@
     import { trpc } from '$lib/trpc'
     import { isAdmin, loginSchema, type SessionUser } from '@repo/auth-shared';
     import { Button, Input, Alert, Card, Spinner } from '@repo/ui';
-    import { logger } from '@repo/logger';
     import 'iconify-icon';
 
     let email = '', password = '', error = '', isLoggingIn = false;
@@ -36,7 +35,7 @@
             );
             goto(resolve('/admin/contacts'));
         } catch (err) {
-            logger.error({ err }, 'Login error');
+            console.error('Login error:', err);
             error = err instanceof Error ? err.message : "Une erreur est survenue lors de la connexion";
             isLoggingIn = false;
         }

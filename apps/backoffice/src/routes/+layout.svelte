@@ -5,14 +5,12 @@
   import { resolve } from '$app/paths';
   import { page } from '$app/state';
   import { ToastContainer } from '@repo/ui';
-  import { logger } from '@repo/logger';
   import '../app.css';
 
   let { children } = $props();
 
   onMount(async () => {
     await authStore.init();
-    logger.info('Auth store initialized');
   });
 
   $effect(() => {

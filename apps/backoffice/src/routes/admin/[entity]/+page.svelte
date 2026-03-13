@@ -3,7 +3,6 @@
   import { trpc } from '$lib/trpc';
   import { AdminAutoTable, AdminAutoForm, Modal, Button, Spinner, Alert, Input } from '@repo/ui';
   import { toast } from '@repo/utils';
-  import { logger } from '@repo/logger';
   import type { EntityConfig, ListResult } from '@repo/admin';
   import { onMount } from 'svelte';
   import 'iconify-icon';
@@ -47,7 +46,7 @@
     try {
       permissions = await trpc.admin.getPermissions.query({ entity });
     } catch (e) {
-      logger.error({ err: e }, 'Failed to load permissions');
+      console.error('Failed to load permissions:', e);
     }
   }
 
@@ -67,7 +66,7 @@
         },
       });
     } catch (e) {
-      logger.error({ err: e }, 'Failed to load data');
+      console.error('Failed to load data:', e);
     } finally {
       loading = false;
     }

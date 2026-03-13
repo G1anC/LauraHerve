@@ -3,7 +3,6 @@
   import { resolve } from '$app/paths';
   import { trpc } from '$lib/trpc';
   import { onMount } from 'svelte';
-  import { logger } from '@repo/logger';
 
   let entities: string[] = [];
   let loading = true;
@@ -12,7 +11,7 @@
     try {
       entities = await trpc.admin.getEntities.query();
     } catch (e) {
-      logger.error({ err: e }, 'Failed to load entities');
+      console.error('Failed to load entities:', e);
     } finally {
       loading = false;
     }
