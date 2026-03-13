@@ -19,13 +19,12 @@ COPY . .
 
 RUN bun install --frozen-lockfile
 
-ARG VITE_API_URL
-ENV VITE_API_URL=$VITE_API_URL
+ARG PUBLIC_API_URL
+ENV PUBLIC_API_URL=$PUBLIC_API_URL
 
-RUN if [ -z "$VITE_API_URL" ]; then \
-      echo "ERROR: VITE_API_URL is required but not set!"; \
-      echo "Please set VITE_API_URL in Railway environment variables."; \
-      exit 1; \
+RUN if [ -z "$PUBLIC_API_URL" ]; then \
+      echo "WARNING: PUBLIC_API_URL is not set during build."; \
+      echo "Make sure it's set as a runtime environment variable in Railway."; \
     fi
 
 RUN bun run build --filter=@repo/frontend
