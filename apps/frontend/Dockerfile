@@ -19,12 +19,12 @@ COPY . .
 
 RUN bun install --frozen-lockfile
 
-ARG PUBLIC_API_URL
-ENV PUBLIC_API_URL=$PUBLIC_API_URL
+ARG VITE_API_URL
+ENV VITE_API_URL=$VITE_API_URL
 
-RUN if [ -z "$PUBLIC_API_URL" ]; then \
-      echo "WARNING: PUBLIC_API_URL is not set during build."; \
-      echo "Make sure it's set as a runtime environment variable in Railway."; \
+RUN if [ -z "$VITE_API_URL" ]; then \
+      echo "WARNING: VITE_API_URL is not set during build."; \
+      echo "The app will use http://localhost:3001 as fallback."; \
     fi
 
 RUN bun run build --filter=@repo/frontend
