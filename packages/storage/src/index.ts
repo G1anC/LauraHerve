@@ -84,9 +84,8 @@ export class StorageService {
     try {
       const result = await (this.client.list({ prefix }) as any);
 
-      for await (const object of result) {
+      for await (const object of result)
         objects.push(object);
-      }
     } catch (e) {
       logger.error({ err: e }, 'Storage list error');
     }
