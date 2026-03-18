@@ -9,11 +9,11 @@ import {
 
 export const galleryRouter = router({
   list: publicProcedure.query(async ({ ctx }) => {
-    return galleryService.list(ctx.db, ctx.storage);
+    return galleryService.list(ctx.db, ctx.requestOrigin);
   }),
 
   listAll: adminProcedure.query(async ({ ctx }) => {
-    return galleryService.listAll(ctx.db, ctx.storage);
+    return galleryService.listAll(ctx.db, ctx.requestOrigin);
   }),
 
   create: adminProcedure.input(createGalleryItemSchema).mutation(async ({ ctx, input }) => {

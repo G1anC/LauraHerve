@@ -1,5 +1,4 @@
 import type { PrismaClient } from '@repo/database';
-import type { StorageService } from '@repo/storage';
 import { TRPCError } from '@trpc/server';
 import type {
   CreateGalleryItemInput,
@@ -7,23 +6,32 @@ import type {
   ReorderItem,
 } from './types';
 
+function buildMediaUrl(requestOrigin: string, key: string) {
+  const encodedKey = key
+    .split('/')
+    .map((segment) => encodeURIComponent(segment))
+    .join('/');
+
+  return `${requestOrigin}/media/${encodedKey}`;
+}
+
 function withPublicMediaUrls<T extends { media: { key: string; url: string } | null }>(
   items: T[],
-  storage: StorageService
+  requestOrigin: string
 ) {
   return items.map((item) => ({
     ...item,
     media: item.media
       ? {
           ...item.media,
-          url: storage.getFileUrl(item.media.key),
+          url: buildMediaUrl(requestOrigin, item.media.key),
         }
       : item.media,
   }));
 }
 
 export const galleryService = {
-  list: async (db: PrismaClient, storage: StorageService) => {
+  list: async (db: PrismaClient, requestOrigin: string) => {
     const items = await db.galleryItem.findMany({
       orderBy: { order: 'asc' },
       include: {
@@ -37,10 +45,10 @@ export const galleryService = {
       },
     });
 
-    return withPublicMediaUrls(items, storage);
+    return withPublicMediaUrls(items, requestOrigin);
   },
 
-  listAll: async (db: PrismaClient, storage: StorageService) => {
+  listAll: async (db: PrismaClient, requestOrigin: string) => {
     const items = await db.galleryItem.findMany({
       orderBy: { order: 'asc' },
       include: {
@@ -48,7 +56,7 @@ export const galleryService = {
       },
     });
 
-    return withPublicMediaUrls(items, storage);
+    return withPublicMediaUrls(items, requestOrigin);
   },
 
   create: async (db: PrismaClient, data: CreateGalleryItemInput) => {

@@ -26,6 +26,7 @@ export const createContext = async ({
   const ipAddress =
     req.headers.get('x-forwarded-for') || req.headers.get('cf-connecting-ip') || undefined;
   const userAgent = req.headers.get('user-agent') || undefined;
+  const requestOrigin = new URL(req.url).origin;
 
   return {
     user,
@@ -35,6 +36,7 @@ export const createContext = async ({
     env,
     ipAddress,
     userAgent,
+    requestOrigin,
     log: contextLogger,
   };
 };
