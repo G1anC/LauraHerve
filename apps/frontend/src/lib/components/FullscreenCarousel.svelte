@@ -19,12 +19,21 @@
 		initialIndex = 0
 	}: { items: GalleryItem[]; onClose?: () => void; initialIndex?: number } = $props();
 
-	let currentIndex = $state(initialIndex);
+	let currentIndex = $state(0);
 	let touchStartX = $state(0);
 	let touchEndX = $state(0);
 	let isTransitioning = $state(false);
 
 	const currentItem = $derived(items[currentIndex]);
+
+	$effect(() => {
+		if (items.length === 0) {
+			currentIndex = 0;
+			return;
+		}
+
+		currentIndex = Math.min(Math.max(initialIndex, 0), items.length - 1);
+	});
 
 	function nextSlide() {
 		if (isTransitioning) return;
@@ -78,6 +87,9 @@
 
 <div
 	class="fixed inset-0 bg-black z-[9999] flex items-center justify-center"
+	role="dialog"
+	aria-modal="true"
+	tabindex="-1"
 	ontouchstart={handleTouchStart}
 	ontouchend={handleTouchEnd}
 >

@@ -23,6 +23,7 @@ const storage = new StorageService({
   accessKeyId: env.MINIO_ROOT_USER,
   secretAccessKey: env.MINIO_ROOT_PASSWORD,
   bucket: env.MINIO_BUCKET_NAME,
+  publicUrl: env.MINIO_PUBLIC_URL,
 });
 
 app.use('*', corsHandler(env.TRUSTED_ORIGINS));

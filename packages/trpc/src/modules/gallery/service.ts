@@ -1,4 +1,5 @@
 import type { PrismaClient } from '@repo/database';
+import type { StorageService } from '@repo/storage';
 import { TRPCError } from '@trpc/server';
 import type {
   CreateGalleryItemInput,
@@ -6,9 +7,24 @@ import type {
   ReorderItem,
 } from './types';
 
+function withPublicMediaUrls<T extends { media: { key: string; url: string } | null }>(
+  items: T[],
+  storage: StorageService
+) {
+  return items.map((item) => ({
+    ...item,
+    media: item.media
+      ? {
+          ...item.media,
+          url: storage.getFileUrl(item.media.key),
+        }
+      : item.media,
+  }));
+}
+
 export const galleryService = {
-  list: async (db: PrismaClient) => {
-    return db.galleryItem.findMany({
+  list: async (db: PrismaClient, storage: StorageService) => {
+    const items = await db.galleryItem.findMany({
       orderBy: { order: 'asc' },
       include: {
         media: {
@@ -20,15 +36,19 @@ export const galleryService = {
         },
       },
     });
+
+    return withPublicMediaUrls(items, storage);
   },
 
-  listAll: async (db: PrismaClient) => {
-    return db.galleryItem.findMany({
+  listAll: async (db: PrismaClient, storage: StorageService) => {
+    const items = await db.galleryItem.findMany({
       orderBy: { order: 'asc' },
       include: {
         media: true,
       },
     });
+
+    return withPublicMediaUrls(items, storage);
   },
 
   create: async (db: PrismaClient, data: CreateGalleryItemInput) => {

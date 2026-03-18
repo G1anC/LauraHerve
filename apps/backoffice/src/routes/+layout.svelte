@@ -14,16 +14,16 @@
   });
 
   $effect(() => {
-    if (!$authStore.loading) {
-      const path = page.url.pathname;
-      const user = $authStore.user;
+    if ($authStore.loading) return;
 
-      if (path.startsWith('/admin') && !user)
-        goto(resolve('/'));
+    const path = page.url.pathname;
+    const user = $authStore.user;
 
-      if (path === '/' && user)
-        goto(resolve('/admin/contacts'));
-    }
+    if (path.startsWith('/admin') && !user)
+      goto(resolve('/'));
+
+    if (path === '/' && user)
+      goto(resolve('/admin'));
   });
 </script>
 
