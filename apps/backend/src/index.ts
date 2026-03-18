@@ -45,7 +45,16 @@ app.get('/media/*', async (c) => {
     return c.json({ error: 'Media not found' }, 404);
   }
 
-  return c.redirect(storage.getPresignedUrl(key, 'GET'), 302);
+  return new Response(null, {
+    status: 302,
+    headers: {
+      Location: storage.getPresignedUrl(key, 'GET'),
+      'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+      Pragma: 'no-cache',
+      Expires: '0',
+      'Surrogate-Control': 'no-store',
+    },
+  });
 });
 
 app.get('/health', createHealthCheckHandler({ storage }));
