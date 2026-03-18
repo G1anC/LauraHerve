@@ -10,10 +10,7 @@ export const mediaService = {
   ) => {
     const fileKey = `gallery/${userId}/${Date.now()}-${data.fileName}`;
 
-    const uploadUrl = storage.client.file(fileKey).presign({
-      expiresIn: 900,
-      method: 'PUT',
-    });
+    const uploadUrl = storage.getPresignedUrl(fileKey, 'PUT');
 
     return {
       uploadUrl,

@@ -14,28 +14,6 @@ import {
 
 const app = new Hono();
 
-function getMimeType(path: string) {
-  const extension = path.split('.').pop()?.toLowerCase();
-
-  switch (extension) {
-    case 'jpg':
-    case 'jpeg':
-      return 'image/jpeg';
-    case 'png':
-      return 'image/png';
-    case 'webp':
-      return 'image/webp';
-    case 'gif':
-      return 'image/gif';
-    case 'svg':
-      return 'image/svg+xml';
-    case 'avif':
-      return 'image/avif';
-    default:
-      return 'application/octet-stream';
-  }
-}
-
 const authManager = new AuthManager({
   jwtSecret: env.ENCRYPTION_SECRET,
 });
@@ -61,18 +39,13 @@ app.get('/media/*', async (c) => {
   }
 
   const key = decodeURIComponent(rawKey);
-  const file = await storage.download(key).catch(() => null);
+  const exists = await storage.exists(key).catch(() => false);
 
-  if (!file) {
+  if (!exists) {
     return c.json({ error: 'Media not found' }, 404);
   }
 
-  return new Response(file, {
-    headers: {
-      'Content-Type': getMimeType(key),
-      'Cache-Control': 'public, max-age=31536000, immutable',
-    },
-  });
+  return c.redirect(storage.getPresignedUrl(key, 'GET'), 302);
 });
 
 app.get('/health', createHealthCheckHandler({ storage }));
