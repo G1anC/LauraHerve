@@ -2,6 +2,7 @@ import { Hono } from 'hono';
 import { loggerMiddleware } from './middleware/logger.middleware';
 import env from './lib/env';
 import { AuthManager } from '@repo/auth';
+import { prisma } from '@repo/database';
 import { StorageService } from '@repo/storage';
 import corsHandler from './handlers/cors';
 import trpcHandler from './handlers/trpc';
@@ -26,6 +27,28 @@ const storage = new StorageService({
   publicUrl: env.MINIO_PUBLIC_URL,
 });
 
+function inferMimeType(path: string) {
+  const extension = path.split('.').pop()?.toLowerCase();
+
+  switch (extension) {
+    case 'jpg':
+    case 'jpeg':
+      return 'image/jpeg';
+    case 'png':
+      return 'image/png';
+    case 'webp':
+      return 'image/webp';
+    case 'gif':
+      return 'image/gif';
+    case 'svg':
+      return 'image/svg+xml';
+    case 'avif':
+      return 'image/avif';
+    default:
+      return 'application/octet-stream';
+  }
+}
+
 app.use('*', corsHandler(env.TRUSTED_ORIGINS));
 app.use('*', loggerMiddleware);
 
@@ -39,20 +62,26 @@ app.get('/media/*', async (c) => {
   }
 
   const key = decodeURIComponent(rawKey);
-  const exists = await storage.exists(key).catch(() => false);
+  const [exists, media] = await Promise.all([
+    storage.exists(key).catch(() => false),
+    prisma.media.findUnique({ where: { key } }).catch(() => null),
+  ]);
 
   if (!exists) {
     return c.json({ error: 'Media not found' }, 404);
   }
 
-  return new Response(null, {
-    status: 302,
+  const file = await storage.download(key).catch(() => null);
+
+  if (!file) {
+    return c.json({ error: 'Media not found' }, 404);
+  }
+
+  return new Response(file, {
+    status: 200,
     headers: {
-      Location: storage.getPresignedUrl(key, 'GET'),
-      'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
-      Pragma: 'no-cache',
-      Expires: '0',
-      'Surrogate-Control': 'no-store',
+      'Content-Type': media?.mimeType || inferMimeType(key),
+      'Cache-Control': 'public, max-age=31536000, immutable',
     },
   });
 });
