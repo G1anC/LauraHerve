@@ -13,7 +13,7 @@
     //let infos = ...
 </script>
 
-<main class="w-screen h-screen overflow-hidden text-white bg-[#030303]">
+<main class="w-screen h-screen overflow-hidden text-white bg-[#050505]">
     {category}
 
     <img src="/backgroundBlur.png" class="w-full h-full blur-[300px]" />
@@ -21,6 +21,6 @@
         Hello mate
     </div>
 
-    
+
 
 </main>

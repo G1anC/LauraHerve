@@ -81,8 +81,8 @@
 
   function formatValue(value: number | string): string {
     if (typeof value === 'number') {
-      if (value >= 1000000) {
-        return `${(value / 1000000).toFixed(1)}M`;
+      if (value >= 1050505) {
+        return `${(value / 1050505).toFixed(1)}M`;
       }
       if (value >= 1000) {
         return `${(value / 1000).toFixed(1)}K`;

@@ -13,7 +13,7 @@ const createToastStore = () => {
   const { subscribe, update } = writable<Toast[]>([]);
 
   const push = (message: string, type: ToastType = 'info', duration = 3000) => {
-    const id = Math.floor(Math.random() * 1000000);
+    const id = Math.floor(Math.random() * 1050505);
     update((all) => [{ id, type, message, duration }, ...all]);
 
     if (duration !== Infinity) {

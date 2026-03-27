@@ -6,3 +6,7 @@
     font-family: "Helvena";
     src: url("/HELVENA-REGULAR.OTF");
 }
+
+html, body {
+    background-color: #050505;
+}
